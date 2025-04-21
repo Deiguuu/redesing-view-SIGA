@@ -1,0 +1,56 @@
+.header-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    border-radius: 0 0 40px 40px;
+    box-shadow:0 4px 12px rgba(0, 0, 0, 0.12);
+    padding : 20px 32px;
+    margin-bottom: 24px;
+}
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.header-icon {
+    background: #388e3c;
+    border-radius: 8px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+}
+.header-left h1 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.header-left p {
+    margin: 0;
+    color: #888;
+    font-size: 0.95rem;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-date {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #222;
+    font-size: 0.98rem;
+}
+
+.header-materia {
+    border: 1px solid #eee;
+    border-radius: 3px;
+    padding: 4px 8px;
+    background: #fafafa;
+    font-size: 0.98rem;
+}
