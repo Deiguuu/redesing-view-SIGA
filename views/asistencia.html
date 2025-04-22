@@ -1,34 +1,51 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Asistencia</title>
-        <link rel="stylesheet" href="../css/asistencia.css">
-        <!-- Corrige la inclusión del JS usando la etiqueta <script> -->
-        <script src="../js/asistencia.js"></script>
-    </head>
-    <body>
-        <header>
-            <div class="header-card">
-                <div class="header-left">
-                    <div class="header-icon">
-                        <!-- Puedes usar un SVG o un ícono de Material Icons -->
-                        <img src="../assets/img/list-check-svgrepo-com.svg" alt="Notas" width="32" height="32" />
-                    </div>
-                    <div>
-                        <h1>Sistema de Asistencia</h1>
-                        <p>Gestiona la asistencia de tus estudiantes</p>
-                    </div>
-                </div>
-                <div class="header-right">
-                    <div class="header-date">
-                        <span class="material-icons">calendar_today</span>
-                        <span>16 de abril de 2025</span>
-                    </div>
-                    <input type="text" class="header-materia" value="Todas las materias" readonly>
-                </div>
-            </div>
-        </header>
-    </body>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asistencia</title>
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="stylesheet" href="../assets/css/asistencia.css">
+    <!-- Flatpickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
+    <script src="../assets/js/asistencia.js" defer></script>
+</head>
+<body>
+<header>
+   <div class="header-card">
+     <div class="header-left">
+       <div class="header-icon">
+         <img src="../assets/img/system assistance.svg" alt="Notas" width="32" height="32" />
+       </div>
+       <div>
+         <h1>Sistema de Asistencia</h1>
+         <p>Gestiona la asistencia de tus estudiantes</p>
+       </div>
+     </div>
+     <div class="header-right">
+       <div class="header-date">
+         <img src="https://cdn-icons-png.flaticon.com/512/747/747310.png" alt="Calendario" class="calendar-icon">
+         <input type="text" id="fecha-header" class="datepicker-header" placeholder="Selecciona una fecha">
+       </div>
+       <input type="text" class="header-materia" value="Todas las materias" readonly>
+     </div>
+   </div>
+</header>
+<nav class="sidebar">
+    <a href="#"><i class="fas fa-home"></i></a>
+    <a href="#"><i class="fas fa-book-open"></i></a>
+    <a href="#"><i class="fas fa-user-check"></i></a>
+    <a href="#"><i class="fas fa-address-card"></i></a>
+    <a href="#"><i class="fas fa-calendar-alt"></i></a>
+    <a href="#"><i class="fas fa-users"></i></a>
+    <a href="#"><i class="fas fa-clipboard-list"></i></a>
+    <a href="#"><i class="fas fa-file-alt"></i></a>
+  </nav>
+
+
+</body>
 </html>
