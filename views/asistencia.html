@@ -15,37 +15,57 @@
     <script src="../assets/js/asistencia.js" defer></script>
 </head>
 <body>
-<header>
-   <div class="header-card">
-     <div class="header-left">
-       <div class="header-icon">
-         <img src="../assets/img/system assistance.svg" alt="Notas" width="32" height="32" />
-       </div>
-       <div>
-         <h1>Sistema de Asistencia</h1>
-         <p>Gestiona la asistencia de tus estudiantes</p>
-       </div>
-     </div>
-     <div class="header-right">
-       <div class="header-date">
-         <img src="https://cdn-icons-png.flaticon.com/512/747/747310.png" alt="Calendario" class="calendar-icon">
-         <input type="text" id="fecha-header" class="datepicker-header" placeholder="Selecciona una fecha">
-       </div>
-       <input type="text" class="header-materia" value="Todas las materias" readonly>
-     </div>
-   </div>
-</header>
-<nav class="sidebar">
-    <a href="#"><i class="fas fa-home"></i></a>
-    <a href="#"><i class="fas fa-book-open"></i></a>
-    <a href="#"><i class="fas fa-user-check"></i></a>
-    <a href="#"><i class="fas fa-address-card"></i></a>
-    <a href="#"><i class="fas fa-calendar-alt"></i></a>
-    <a href="#"><i class="fas fa-users"></i></a>
-    <a href="#"><i class="fas fa-clipboard-list"></i></a>
-    <a href="#"><i class="fas fa-file-alt"></i></a>
-  </nav>
+  <header>
+    <div class="header-card">
+      <div class="header-left">
+        <div class="header-icon">
+          <img src="../assets/img/system assistance.svg" alt="Notas" width="32" height="32" />
+        </div>
+        <div>
+          <h1>Sistema de Asistencia</h1>
+          <p>Gestiona la asistencia de tus estudiantes</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="header-date">
+          <img src="https://cdn-icons-png.flaticon.com/512/747/747310.png" alt="Calendario" class="calendar-icon">
+          <input type="text" id="fecha-header" class="datepicker-header" placeholder="Selecciona una fecha">
+        </div>
+        <input type="text" class="header-materia" value="Todas las materias" readonly>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="sidebar">
+      <a href="#"><i class="fas fa-home"></i></a>
+      <a href="#"><i class="fas fa-book-open"></i></a>
+      <a href="#"><i class="fas fa-user-check"></i></a>
+      <a href="#"><i class="fas fa-address-card"></i></a>
+      <a href="#"><i class="fas fa-calendar-alt"></i></a>
+      <a href="#"><i class="fas fa-users"></i></a>
+      <a href="#"><i class="fas fa-clipboard-list"></i></a>
+      <a href="#"><i class="fas fa-file-alt"></i></a>
+    </nav>
+
+    <main class="main-content">
+      <div class="tab-container">
+        <div class="tab active">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M3 4H21M3 10H21M3 16H15" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+          Registro
+        </div>
+        <div class="tab">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M3 3v18h18" stroke="white" stroke-width="2" stroke-linecap="round"/><path d="M7 15l4-4 4 4" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+          Estadísticas
+        </div>
+        <div class="tab">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h10" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+          Reportes
+        </div>
+      </div>
 
 
+    <!-- Aquí podés agregar más contenido si querés -->
+  </main>
 </body>
 </html>

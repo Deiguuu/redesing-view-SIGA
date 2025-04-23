@@ -1,116 +1,158 @@
 * {
-    font-family: 'Satoshi', sans-serif;
-  }
-  .sidebar {
-    width: 60px;
-    height: 475px; /* Ajuste según la imagen */
-    background-color: #3AAA35;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-radius: 30px;
-  }
+  font-family: 'Satoshi', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-  .sidebar a {
-    color: #DFFFE0;
-    font-size: 24px;
-    text-decoration: none;
-    transition: transform 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    flex-grow: 1;
-  }
+body {
+  background-color: #f5f5f5;
+}
 
-  .sidebar a:hover {
-    transform: scale(1.2);
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-/* Estilos generales del header */
 .header-card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #fff;
-    border-radius: 0 0 40px 40px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-    padding: 20px 32px;
-    margin-bottom: 24px;
-  }
-  
-  .header-left {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  
-  .header-icon {
-    background: #3AAA35;
-    border-radius: 8px;
-    padding: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 12px;
-  }
-  
-  .header-icon img {
-    color: #fff;
-  }
-  
-  .header-left h1 {
-    margin: 0;
-    font-size: 1.3rem;
-  }
-  
-  .header-left p {
-    margin: 0;
-    color: #888;
-    font-size: 0.95rem;
-  }
-  
-  .header-right {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  
-  /* Calendario funcional */
-  .header-date {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: #222;
-    font-size: 0.98rem;
-  }
-  
-  .calendar-icon {
-    width: 20px;
-    height: 20px;
-    pointer-events: none;
-  }
-  
-  /* ✅ Estilo igual a "Todas las materias" */
-  .datepicker-header {
-    border: 1px solid #eee;
-    border-radius: 3px;
-    padding: 4px 8px;
-    background: #fafafa;
-    font-size: 0.98rem;
-    color: #222;
-    cursor: pointer;
-    width: auto;
-  }
-  
-  /* Campo de materia */
-  .header-materia {
-    border: 1px solid #eee;
-    border-radius: 3px;
-    padding: 4px 8px;
-    background: #fafafa;
-    font-size: 0.98rem;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border-radius: 0 0 40px 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  padding: 20px 32px;
+  margin-bottom: 24px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-icon {
+  background: #3AAA35;
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+}
+
+.header-left h1 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.header-left p {
+  margin: 0;
+  color: #888;
+  font-size: 0.95rem;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-date {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #222;
+  font-size: 0.98rem;
+}
+
+.calendar-icon {
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+.datepicker-header,
+.header-materia {
+  border: 1px solid #eee;
+  border-radius: 3px;
+  padding: 4px 8px;
+  background: #fafafa;
+  font-size: 0.98rem;
+}
+
+.layout {
+  display: flex;
+  gap: 24px;
+  padding: 0 24px;
+}
+
+.sidebar {
+  width: 60px;
+  height: 475px;
+  background-color: #3AAA35;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-radius: 30px;
+}
+
+.sidebar a {
+  color: #DFFFE0;
+  font-size: 24px;
+  text-decoration: none;
+  transition: transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.sidebar a:hover {
+  transform: scale(1.2);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.main-content {
+  flex: 1;
+  margin-top: -24px;
+}
+
+.tab-container {
+  display: flex;
+  background-color: #66c37d;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.tab {
+  flex: 1;
+  padding: 12px 16px;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease, flex-grow 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.tab:hover {
+  background-color: #57ae6b;
+  flex-grow: 1.05;
+}
+
+.tab.active {
+  background-color: #34a853;
+}
+
+.icon {
+  stroke: white;
+  height: 20px;
+  width: 20px;
+}
+
+.tab-container {
+  margin-top: 24px; /* Esto agrega espacio entre el header y las tabs */
+}
