@@ -175,12 +175,13 @@ function mostrarToast(mensaje, tipo = "success") {
 flatpickr("#fecha-header", {
   dateFormat: "j \\de F \\de Y",
   locale: "es",
-  defaultDate: "today",
+  defaultDate: localStorage.getItem("fechaSeleccionada") || "today",
   onChange: function(selectedDates) {
     const dias = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
     const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
     const fecha = selectedDates[0];
     if (fecha) {
+      localStorage.setItem("fechaSeleccionada", fecha.toISOString());
       const texto = `${dias[fecha.getDay()]}, ${fecha.getDate()} de ${meses[fecha.getMonth()]} de ${fecha.getFullYear()}`;
       document.getElementById("fecha-pill").textContent = texto;
     }
@@ -191,6 +192,11 @@ flatpickr("#fecha-header", {
 function actualizarVista() {
   const materia = document.getElementById("materia-toggle").value;
   const grupo = document.getElementById("grupo-toggle").value;
+
+  // Guardar en localStorage
+  localStorage.setItem("materiaSeleccionada", materia);
+  localStorage.setItem("grupoSeleccionado", grupo);
+
   cargarEstudiantes(materia, grupo);
   document.getElementById("materia-subtext").textContent = nombreMaterias[materia] || "Todas las materias";
 }
@@ -198,7 +204,10 @@ function actualizarVista() {
 document.getElementById("materia-toggle").addEventListener("change", actualizarVista);
 document.getElementById("grupo-toggle").addEventListener("change", actualizarVista);
 
-// Inicializa con valores por defecto
-document.getElementById("materia-toggle").value = "todas";
-document.getElementById("grupo-toggle").value = "grupo1";
+// Restaurar selección previa
+const materiaGuardada = localStorage.getItem("materiaSeleccionada") || "todas";
+const grupoGuardado = localStorage.getItem("grupoSeleccionado") || "grupo1";
+
+document.getElementById("materia-toggle").value = materiaGuardada;
+document.getElementById("grupo-toggle").value = grupoGuardado;
 actualizarVista();
