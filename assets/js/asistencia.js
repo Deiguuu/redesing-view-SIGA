@@ -1,4 +1,6 @@
 // Registro de asistencia
+
+// Lista general de estudiantes
 const estudiantes = [
   { nombre: "Diego Jose Roque Tercero", carnet: "DJRT-43545-43545" },
   { nombre: "Andrea López Méndez", carnet: "ALM-12345-78901" },
@@ -11,19 +13,22 @@ const estudiantes = [
   { nombre: "Eduardo Peralta Guzmán", carnet: "EPG-89012-45678" },
   { nombre: "Gabriela Moreno Reyes", carnet: "GMR-90123-56789" },
   { nombre: "Ana Karina Zepeda", carnet: "AKZ-01234-67890" },
-  { nombre: "Héctor Salazar Mejía", carnet: "HSM-12345-78901" },
+  { nombre: "Héctor Salazar Mejía", carnet: "HSM-12345-78901" }
 ];
 
+// Definición de estados de asistencia
 const estadosAsistencia = {
   pendiente: { texto: "Pendiente", icono: "\u26A0", clase: "pendiente" },
   presente: { texto: "Presente", icono: "\u2714", clase: "presente" },
   tardanza: { texto: "Tardanza", icono: "\u23F0", clase: "tardanza" },
   justificado: { texto: "Justificado", icono: "\u2709", clase: "justificado" },
-  ausente: { texto: "Ausente", icono: "\u2B1B", clase: "ausente" },
+  ausente: { texto: "Ausente", icono: "\u2B1B", clase: "ausente" }
 };
 
+// Registro de la asistencia
 const asistenciaRegistro = {};
 
+// Función para obtener las iniciales del nombre
 function obtenerIniciales(nombre) {
   return nombre
     .split(" ")
@@ -33,6 +38,7 @@ function obtenerIniciales(nombre) {
     .toUpperCase();
 }
 
+// Función para generar un color único
 function generarColor(nombre) {
   let hash = 0;
   for (let i = 0; i < nombre.length; i++) {
@@ -41,7 +47,27 @@ function generarColor(nombre) {
   return `hsl(${hash % 360}, 70%, 50%)`;
 }
 
-function crearFila(est, index) {
+// Distribuir estudiantes en grupos según materia:
+// Dividimos la lista de 12 estudiantes en 4 grupos de 3 para asignarlos arbitrariamente a cada materia.
+const estudiantesPorMateria = {
+  "todas": estudiantes,
+  "prog-web": estudiantes.slice(0, 3),
+  "prog-android": estudiantes.slice(3, 6),
+  "prog-ios": estudiantes.slice(6, 9),
+  "prog-py": estudiantes.slice(9, 12)
+};
+
+// Mapeo de valores del select a nombres descriptivos
+const nombreMaterias = {
+  "todas": "Todas las materias",
+  "prog-web": "Programación Web",
+  "prog-android": "Programación Android",
+  "prog-ios": "Programación iOS",
+  "prog-py": "Programación Python"
+};
+
+// Función para crear la fila de la tabla para cada estudiante
+function crearFila(est) {
   const iniciales = obtenerIniciales(est.nombre);
   const color = generarColor(est.nombre);
   return `
@@ -49,54 +75,67 @@ function crearFila(est, index) {
       <td>
         <div class="nombre-con-avatar">
           <div class="avatar" style="background-color: ${color};">${iniciales}</div>
-          <div><strong>${est.nombre}</strong><br><span style="color: #888; font-size: 0.85rem;">${est.carnet}</span></div>
+          <div>
+            <strong>${est.nombre}</strong><br>
+            <span style="color: #888; font-size: 0.85rem;">${est.carnet}</span>
+          </div>
         </div>
       </td>
       <td>
-        <select class="estado-toggle ${estadosAsistencia.pendiente.clase}" onchange="actualizarEstado(this, ${index})">
-          ${Object.entries(estadosAsistencia).map(([key, estado]) =>
-            `<option value="${key}">${estado.icono} ${estado.texto}</option>`).join('')}
+        <select class="estado-toggle ${estadosAsistencia.pendiente.clase}" data-carnet="${est.carnet}" onchange="actualizarEstado(this, '${est.carnet}')">
+          ${Object.entries(estadosAsistencia)
+            .map(([key, estado]) => `<option value="${key}">${estado.icono} ${estado.texto}</option>`)
+            .join('')}
         </select>
       </td>
-      <td><input type="text" placeholder="Observación opcional" id="obs-${index}" /></td>
+      <td>
+        <input type="text" placeholder="Observación opcional" id="obs-${est.carnet}" />
+      </td>
     </tr>
   `;
 }
 
-function actualizarEstado(selectEl, index) {
+// Actualiza el estado de un estudiante
+function actualizarEstado(selectEl, carnet) {
   const estado = selectEl.value;
   selectEl.className = `estado-toggle ${estadosAsistencia[estado].clase}`;
-  asistenciaRegistro[estudiantes[index].carnet] = {
+  asistenciaRegistro[carnet] = {
     estado,
-    observacion: document.getElementById(`obs-${index}`).value
+    observacion: document.getElementById(`obs-${carnet}`).value
   };
 }
 
-function cargarEstudiantes() {
-  document.getElementById("tablaEstudiantes").innerHTML = estudiantes.map(crearFila).join("");
+// Carga los estudiantes en la tabla según el filtro de materia seleccionado
+function cargarEstudiantes(filtro = "todas") {
+  const lista = estudiantesPorMateria[filtro] || [];
+  document.getElementById("tablaEstudiantes").innerHTML = lista.map(crearFila).join("");
+  // Actualiza el número total de estudiantes mostrados
+  document.getElementById("total-estudiantes").textContent = `${lista.length} estudiantes`;
 }
 
+// Marca todos los estudiantes como presentes (en la vista actual)
 function marcarTodosPresentes() {
   const selects = document.querySelectorAll(".estado-toggle");
-  selects.forEach((select, i) => {
+  selects.forEach(select => {
+    const carnet = select.getAttribute("data-carnet");
     select.value = "presente";
-    actualizarEstado(select, i);
+    actualizarEstado(select, carnet);
   });
 }
 
+// Guarda el registro de asistencia
 function guardarTodo() {
-  const total = estudiantes.length;
+  const totalActual = Object.values(estudiantesPorMateria)[0].length; // total de estudiantes en "Todas"
   const registrados = Object.keys(asistenciaRegistro).length;
-
-  if (registrados < total) {
+  if (registrados < totalActual) {
     mostrarToast("No se pudo guardar: falta registrar asistencia.", "error");
     return;
   }
-
   console.log("Registro de asistencia:", asistenciaRegistro);
   mostrarToast("Datos de asistencia guardados correctamente.", "success");
 }
 
+// Muestra una notificación temporal (Toast)
 function mostrarToast(mensaje, tipo = "success") {
   const toast = document.getElementById("toast");
   const message = document.getElementById("toast-message");
@@ -115,9 +154,7 @@ function mostrarToast(mensaje, tipo = "success") {
   }, 3000);
 }
 
-cargarEstudiantes();
-
-// Flatpickr configuración
+// Configuración de Flatpickr para el input de fecha
 flatpickr("#fecha-header", {
   dateFormat: "j \\de F \\de Y",
   locale: "es",
@@ -132,3 +169,17 @@ flatpickr("#fecha-header", {
     }
   }
 });
+
+// Evento para el cambio de materia en el select
+document.getElementById("materia-toggle").addEventListener("change", function() {
+  const valor = this.value;
+  // Carga la lista correspondiente de estudiantes
+  cargarEstudiantes(valor);
+  // Actualiza el subtítulo en el header
+  document.getElementById("materia-subtext").textContent = nombreMaterias[valor] || "Todas las materias";
+});
+
+// Al cargar la página, inicializamos con "Todas las materias"
+cargarEstudiantes("todas");
+document.getElementById("materia-toggle").value = "todas";
+document.getElementById("materia-subtext").textContent = nombreMaterias["todas"];

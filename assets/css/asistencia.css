@@ -80,14 +80,14 @@ body {
   display: flex;
   gap: 24px;
   padding: 0 24px;
-  align-items: flex-start; /* Evita que se estire la sidebar */
+  align-items: flex-start;
 }
 
 .sidebar {
   position: sticky;
-  top: 120px; /* Ajustá esto según el tamaño del header y tabs */
+  top: 120px;
   width: 60px;
-  height: 475px; /* Mantenemos la altura original */
+  height: 475px;
   background-color: #34a853;
   display: flex;
   flex-direction: column;
@@ -95,10 +95,9 @@ body {
   align-items: center;
   padding: 10px 0;
   border-radius: 30px;
-  flex-shrink: 0; /* Impide que se reduzca en pantallas pequeñas */
-  z-index: 10; /* Asegura que quede por encima si hay superposición */
+  flex-shrink: 0;
+  z-index: 10;
 }
-
 
 .sidebar a {
   color: #DFFFE0;
@@ -128,6 +127,7 @@ body {
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 24px;
+  margin-top: 24px;
 }
 
 .tab {
@@ -159,14 +159,10 @@ body {
   width: 20px;
 }
 
-.tab-container {
-  margin-top: 24px; /* Esto agrega espacio entre el header y las tabs */
-}
-
 /* ========== REGISTRO DE ASISTENCIA UI ========== */
 .container {
-  width: 100%; /* Asegura que ocupe todo el ancho disponible */
-  max-width: 100%; /* No se puede hacer más grande que el espacio disponible */
+  width: 100%;
+  max-width: 100%;
   margin: 2rem auto;
   background: #fff;
   border-radius: 20px;
@@ -349,4 +345,20 @@ select.estado-toggle {
 .toast.show {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ========== NUEVO SELECTOR DE MATERIAS ========== */
+.materia-filter {
+  padding: 1rem 2rem;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.materia-toggle {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  border: 2px solid #ccc;
+  background-color: #f9f9f9;
+  font-weight: 500;
 }

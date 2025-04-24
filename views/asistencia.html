@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asistencia</title>
-    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-    <link rel="stylesheet" href="../assets/css/asistencia.css">
-    <!-- Flatpickr -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
-    <script src="../assets/js/asistencia.js" defer></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asistencia</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link rel="stylesheet" href="../assets/css/asistencia.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
+  <script src="../assets/js/asistencia.js" defer></script>
 </head>
+
 <body>
   <header>
     <div class="header-card">
@@ -26,12 +26,19 @@
           <p>Gestiona la asistencia de tus estudiantes</p>
         </div>
       </div>
-      <div class="header-right">
+
+      <div class="header-right header-fecha-materia">
         <div class="header-date">
-          <img src="https://cdn-icons-png.flaticon.com/512/747/747310.png" alt="Calendario" class="calendar-icon">
-          <input type="text" id="fecha-header" class="datepicker-header" placeholder="Selecciona una fecha">
+          <img src="https://cdn-icons-png.flaticon.com/512/747/747310.png" alt="Calendario" class="calendar-icon" />
+          <input type="text" id="fecha-header" class="datepicker-header" placeholder="Selecciona una fecha" />
         </div>
-        <input type="text" class="header-materia" value="Todas las materias" readonly>
+        <select id="materia-toggle" class="header-materia">
+          <option value="todas">Todas las materias</option>
+          <option value="prog-web">Programación Web</option>
+          <option value="prog-android">Programación Android</option>
+          <option value="prog-ios">Programación iOS</option>
+          <option value="prog-py">Programación Python</option>
+        </select>
       </div>
     </div>
   </header>
@@ -51,69 +58,71 @@
     <main class="main-content">
       <div class="tab-container">
         <div class="tab active">
-          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M3 4H21M3 10H21M3 16H15" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg class="icon" viewBox="0 0 24 24" fill="none">
+            <path d="M3 4H21M3 10H21M3 16H15" stroke="white" stroke-width="2" stroke-linecap="round" />
+          </svg>
           Registro
         </div>
         <div class="tab">
-          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M3 3v18h18" stroke="white" stroke-width="2" stroke-linecap="round"/><path d="M7 15l4-4 4 4" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg class="icon" viewBox="0 0 24 24" fill="none">
+            <path d="M3 3v18h18" stroke="white" stroke-width="2" stroke-linecap="round" />
+            <path d="M7 15l4-4 4 4" stroke="white" stroke-width="2" stroke-linecap="round" />
+          </svg>
           Estadísticas
         </div>
         <div class="tab">
-          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h10" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg class="icon" viewBox="0 0 24 24" fill="none">
+            <path d="M4 6h16M4 12h16M4 18h10" stroke="white" stroke-width="2" stroke-linecap="round" />
+          </svg>
           Reportes
         </div>
       </div>
 
-      <!-- Contenido de la pestaña 'Registro' -->
-      <div class="tab-content" id="registro-content" style="margin-top: 20px;">
+      <div class="tab-content" id="registro-content" style="margin-top: 20px">
         <div class="container">
-            <div class="header">
-                <h1>Registro de Asistencia</h1>
-                <p class="subtext">Todas las materias</p>
-            </div>
+          <div class="header">
+            <h1>Registro de Asistencia</h1>
+            <p class="subtext" id="materia-subtext">Todas las materias</p>
+          </div>
 
-            <div class="toolbar">
-              <span class="pill" id="fecha-pill">Jueves, 17 de abril de 2025</span>
-                <span class="pill">12 estudiantes</span>
-                <button class="btn present" onclick="marcarTodosPresentes()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#28a745" viewBox="0 0 24 24">
-                        <path d="M20.285 6.708l-11.285 11.285-5.285-5.285 1.414-1.414 3.871 3.871 9.871-9.871z" />
-                    </svg>
-                    Todos presentes
-                </button>
-                <button class="btn save" onclick="guardarTodo()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#4b62d9" viewBox="0 0 24 24">
-                        <path d="M17 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7l-4-4zm0 2.5L19.5 8H17V5.5zM12 19a3 3 0 1 1 0-6 3 3 0 0 1 0 6zM6 9V5h8v4H6z" />
-                    </svg>
-                    Guardar todo
-                </button>
-            </div>
+          <div class="toolbar">
+            <span class="pill" id="fecha-pill">Jueves, 17 de abril de 2025</span>
+            <span class="pill" id="total-estudiantes">12 estudiantes</span>
+            <button class="btn present" onclick="marcarTodosPresentes()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#28a745" viewBox="0 0 24 24">
+                <path d="M20.285 6.708l-11.285 11.285-5.285-5.285 1.414-1.414 3.871 3.871 9.871-9.871z" />
+              </svg>
+              Todos presentes
+            </button>
+            <button class="btn save" onclick="guardarTodo()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#4b62d9" viewBox="0 0 24 24">
+                <path
+                  d="M17 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7l-4-4zm0 2.5L19.5 8H17V5.5zM12 19a3 3 0 1 1 0-6 3 3 0 0 1 0 6zM6 9V5h8v4H6z" />
+              </svg>
+              Guardar todo
+            </button>
+          </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Estudiante</th>
-                        <th>Asistencia</th>
-                        <th>Observaciones</th>
-                    </tr>
-                </thead>
-                <tbody id="tablaEstudiantes"></tbody>
-            </table>
+          <table>
+            <thead>
+              <tr>
+                <th>Estudiante</th>
+                <th>Asistencia</th>
+                <th>Observaciones</th>
+              </tr>
+            </thead>
+            <tbody id="tablaEstudiantes"></tbody>
+          </table>
         </div>
 
         <div id="toast" class="toast hidden">
-            <span id="toast-message"></span>
+          <span id="toast-message"></span>
         </div>
-    </div>
+      </div>
+    </main>
+  </div>
 
-</main>
-</div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 
-
-    <!-- Aquí podés agregar más contenido si querés -->
-  </main>
-</body>
 </html>
