@@ -1,3 +1,41 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const tabs = document.querySelectorAll(".tab");
+  const contents = document.querySelectorAll(".tab-content");
+  const sidebarLinks = document.querySelectorAll(".sidebar a");
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => {
+      tabs.forEach((t) => t.classList.remove("active"));
+      contents.forEach((c) => c.classList.add("hidden"));
+      tab.classList.add("active");
+
+      const targetId = tab.getAttribute("data-tab");
+      document.getElementById(targetId).classList.remove("hidden");
+
+      // Actualiza el estado visual de la sidebar si aplica
+      sidebarLinks.forEach((link) => link.classList.remove("active"));
+      // Suponiendo que el tercer ítem (índice 2) es "Asistencia"
+      // y el cuarto (índice 3) es "Estadísticas"
+      if (targetId === "registro-content") {
+        sidebarLinks[2].classList.add("active");
+      } else if (targetId === "estadisticas-content") {
+        sidebarLinks[3].classList.add("active");
+      }
+    });
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".tab").forEach((tab) => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll(".tab").forEach((t) => t.classList.remove("active"));
+      document.querySelectorAll(".tab-content").forEach((content) => content.classList.add("hidden"));
+      tab.classList.add("active");
+      const targetId = tab.getAttribute("data-tab");
+      document.getElementById(targetId).classList.remove("hidden");
+    });
+  });
+});
 // Definición de estados de asistencia
 const estadosAsistencia = {
   pendiente: { texto: "Pendiente", icono: "\u26A0", clase: "pendiente" },
@@ -23,7 +61,6 @@ function generarEstudiantes(materia, grupo) {
   }));
 }
 
-// Estructura: estudiantesPorMateriaYGrupo[materia][grupo] = [estudiantes...]
 const estudiantesPorMateriaYGrupo = {};
 materias.forEach(materia => {
   estudiantesPorMateriaYGrupo[materia] = {};
@@ -32,7 +69,6 @@ materias.forEach(materia => {
   });
 });
 
-// Para "todas", une todos los estudiantes de todas las materias y grupos
 function obtenerTodosEstudiantes(grupo) {
   let todos = [];
   materias.forEach(materia => {
@@ -41,7 +77,6 @@ function obtenerTodosEstudiantes(grupo) {
   return todos;
 }
 
-// Mapeo de valores del select a nombres descriptivos
 const nombreMaterias = {
   "todas": "Todas las materias",
   "prog-web": "Programación Web",
@@ -50,10 +85,8 @@ const nombreMaterias = {
   "prog-py": "Programación Python"
 };
 
-// Registro de la asistencia
 const asistenciaRegistro = {};
 
-// Función para obtener las iniciales del nombre
 function obtenerIniciales(nombre) {
   return nombre
     .split(" ")
@@ -63,7 +96,6 @@ function obtenerIniciales(nombre) {
     .toUpperCase();
 }
 
-// Función para generar un color único
 function generarColor(nombre) {
   let hash = 0;
   for (let i = 0; i < nombre.length; i++) {
@@ -72,7 +104,6 @@ function generarColor(nombre) {
   return `hsl(${hash % 360}, 70%, 50%)`;
 }
 
-// Función para crear la fila de la tabla para cada estudiante
 function crearFila(est) {
   const iniciales = obtenerIniciales(est.nombre);
   const color = generarColor(est.nombre);
@@ -101,7 +132,6 @@ function crearFila(est) {
   `;
 }
 
-// Actualiza el estado de un estudiante
 function actualizarEstado(selectEl, carnet) {
   const estado = selectEl.value;
   selectEl.className = `estado-toggle ${estadosAsistencia[estado].clase}`;
@@ -109,9 +139,9 @@ function actualizarEstado(selectEl, carnet) {
     estado,
     observacion: document.getElementById(`obs-${carnet}`).value
   };
+  actualizarEstadisticas();
 }
 
-// Carga los estudiantes en la tabla según el filtro de materia y grupo seleccionados
 function cargarEstudiantes(materia = "todas", grupo = "grupo1") {
   let lista = [];
   if (materia === "todas") {
@@ -121,9 +151,9 @@ function cargarEstudiantes(materia = "todas", grupo = "grupo1") {
   }
   document.getElementById("tablaEstudiantes").innerHTML = lista.map(crearFila).join("");
   document.getElementById("total-estudiantes").textContent = `${lista.length} estudiantes`;
+  actualizarEstadisticas();
 }
 
-// Marca todos los estudiantes como presentes (en la vista actual)
 function marcarTodosPresentes() {
   const selects = document.querySelectorAll(".estado-toggle");
   selects.forEach(select => {
@@ -133,7 +163,6 @@ function marcarTodosPresentes() {
   });
 }
 
-// Guarda el registro de asistencia
 function guardarTodo() {
   const materia = document.getElementById("materia-toggle").value;
   const grupo = document.getElementById("grupo-toggle").value;
@@ -150,9 +179,9 @@ function guardarTodo() {
   }
   console.log("Registro de asistencia:", asistenciaRegistro);
   mostrarToast("Datos de asistencia guardados correctamente.", "success");
+  actualizarEstadisticas();
 }
 
-// Muestra una notificación temporal (Toast)
 function mostrarToast(mensaje, tipo = "success") {
   const toast = document.getElementById("toast");
   const message = document.getElementById("toast-message");
@@ -171,7 +200,6 @@ function mostrarToast(mensaje, tipo = "success") {
   }, 3000);
 }
 
-// Configuración de Flatpickr para el input de fecha
 flatpickr("#fecha-header", {
   dateFormat: "j \\de F \\de Y",
   locale: "es",
@@ -188,15 +216,11 @@ flatpickr("#fecha-header", {
   }
 });
 
-// Evento para el cambio de materia o grupo en los selects
 function actualizarVista() {
   const materia = document.getElementById("materia-toggle").value;
   const grupo = document.getElementById("grupo-toggle").value;
-
-  // Guardar en localStorage
   localStorage.setItem("materiaSeleccionada", materia);
   localStorage.setItem("grupoSeleccionado", grupo);
-
   cargarEstudiantes(materia, grupo);
   document.getElementById("materia-subtext").textContent = nombreMaterias[materia] || "Todas las materias";
 }
@@ -204,10 +228,34 @@ function actualizarVista() {
 document.getElementById("materia-toggle").addEventListener("change", actualizarVista);
 document.getElementById("grupo-toggle").addEventListener("change", actualizarVista);
 
-// Restaurar selección previa
 const materiaGuardada = localStorage.getItem("materiaSeleccionada") || "todas";
 const grupoGuardado = localStorage.getItem("grupoSeleccionado") || "grupo1";
-
 document.getElementById("materia-toggle").value = materiaGuardada;
 document.getElementById("grupo-toggle").value = grupoGuardado;
 actualizarVista();
+
+// Actualizar estadísticas
+function actualizarEstadisticas() {
+  const total = document.querySelectorAll(".estado-toggle").length;
+  const contadores = {
+    presente: 0,
+    tardanza: 0,
+    ausente: 0,
+    justificado: 0
+  };
+  document.querySelectorAll(".estado-toggle").forEach(select => {
+    const estado = select.value;
+    if (contadores.hasOwnProperty(estado)) contadores[estado]++;
+  });
+  const actualizarCard = (clase, cantidad) => {
+    const card = document.querySelector(`.card.${clase}`);
+    if (!card) return;
+    const porcentaje = total ? Math.round((cantidad / total) * 100) : 0;
+    card.querySelector(".porcentaje").textContent = `${porcentaje}%`;
+    card.querySelector(".detalle").textContent = `${cantidad} de ${total} registros`;
+  };
+  actualizarCard("asistencia", contadores.presente);
+  actualizarCard("tardanzas", contadores.tardanza);
+  actualizarCard("ausencias", contadores.ausente);
+  actualizarCard("justificaciones", contadores.justificado);
+}
