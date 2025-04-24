@@ -64,6 +64,54 @@
         </div>
       </div>
 
+      <!-- Contenido de la pestaña 'Registro' -->
+      <div class="tab-content" id="registro-content" style="margin-top: 20px;">
+        <div class="container">
+            <div class="header">
+                <h1>Registro de Asistencia</h1>
+                <p class="subtext">Todas las materias</p>
+            </div>
+
+            <div class="toolbar">
+                <span class="pill">Jueves, 17 de abril de 2025</span>
+                <span class="pill">12 estudiantes</span>
+                <button class="btn present" onclick="marcarTodosPresentes()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#28a745" viewBox="0 0 24 24">
+                        <path d="M20.285 6.708l-11.285 11.285-5.285-5.285 1.414-1.414 3.871 3.871 9.871-9.871z" />
+                    </svg>
+                    Todos presentes
+                </button>
+                <button class="btn save" onclick="guardarTodo()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#4b62d9" viewBox="0 0 24 24">
+                        <path d="M17 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7l-4-4zm0 2.5L19.5 8H17V5.5zM12 19a3 3 0 1 1 0-6 3 3 0 0 1 0 6zM6 9V5h8v4H6z" />
+                    </svg>
+                    Guardar todo
+                </button>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Estudiante</th>
+                        <th>Asistencia</th>
+                        <th>Observaciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaEstudiantes"></tbody>
+            </table>
+        </div>
+
+        <div id="toast" class="toast hidden">
+            <span id="toast-message"></span>
+        </div>
+    </div>
+
+</main>
+</div>
+
+<script src="script.js"></script>
+</body>
+
 
     <!-- Aquí podés agregar más contenido si querés -->
   </main>

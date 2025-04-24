@@ -27,7 +27,7 @@ body {
 }
 
 .header-icon {
-  background: #3AAA35;
+  background: #34a853;
   border-radius: 8px;
   padding: 8px;
   display: flex;
@@ -85,7 +85,7 @@ body {
 .sidebar {
   width: 60px;
   height: 475px;
-  background-color: #3AAA35;
+  background-color: #34a853;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -155,4 +155,192 @@ body {
 
 .tab-container {
   margin-top: 24px; /* Esto agrega espacio entre el header y las tabs */
+}
+
+/* ========== REGISTRO DE ASISTENCIA UI ========== */
+.container {
+  width: 100%; /* Asegura que ocupe todo el ancho disponible */
+  max-width: 100%; /* No se puede hacer más grande que el espacio disponible */
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.header {
+  background: #e4e4e4;
+  padding: 1rem 2rem;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.subtext {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.toolbar {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.pill {
+  background: #f1f1f1;
+  border-radius: 9999px;
+  padding: 0.4rem 1rem;
+  font-size: 0.9rem;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border: 2px solid transparent;
+  background-color: white;
+  font-weight: 500;
+}
+
+.btn.present {
+  color: #28a745;
+  border-color: #28a745;
+}
+
+.btn.present:hover {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn.present:hover svg {
+  fill: white;
+}
+
+.btn.save {
+  color: #4b62d9;
+  border-color: #4b62d9;
+}
+
+.btn.save:hover {
+  background-color: #4b62d9;
+  color: white;
+}
+
+.btn.save:hover svg {
+  fill: white;
+}
+
+svg {
+  transition: fill 0.25s ease;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 1rem;
+  border-top: 1px solid #eee;
+  text-align: left;
+}
+
+tr:hover {
+  background: #f9f9f9;
+}
+
+input[type="text"] {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 90%;
+}
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  margin-right: 0.75rem;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.nombre-con-avatar {
+  display: flex;
+  align-items: center;
+}
+
+select.estado-toggle {
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+  border: 2px solid #ddd;
+  font-size: 0.9rem;
+}
+
+.ausente {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+.tardanza {
+  background-color: #fff3cd;
+  color: #856404;
+}
+.justificado {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+.presente {
+  background-color: #d4edda;
+  color: #155724;
+}
+.pendiente {
+  background-color: #e2e3e5;
+  color: #383d41;
+}
+
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #4b62d9;
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  font-weight: 500;
+  font-size: 0.95rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 9999;
+}
+
+.toast.error {
+  background-color: #e74c3c;
+}
+.toast.success {
+  background-color: #28a745;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
 }
