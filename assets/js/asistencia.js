@@ -119,18 +119,16 @@ cargarEstudiantes();
 
 // Flatpickr configuración
 flatpickr("#fecha-header", {
-  dateFormat: "j \\de F \\de Y", // Formato de fecha
-  locale: "es",                  // Localización en español
-  defaultDate: "today"           // Fecha por defecto: hoy
-});
-
-// Tabs dinámicas
-const tabs = document.querySelectorAll('.tab');
-
-tabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    tabs.forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    console.log(`Tab activa: ${tab.dataset.tab}`);
-  });
+  dateFormat: "j \\de F \\de Y",
+  locale: "es",
+  defaultDate: "today",
+  onChange: function(selectedDates) {
+    const dias = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+    const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+    const fecha = selectedDates[0];
+    if (fecha) {
+      const texto = `${dias[fecha.getDay()]}, ${fecha.getDate()} de ${meses[fecha.getMonth()]} de ${fecha.getFullYear()}`;
+      document.getElementById("fecha-pill").textContent = texto;
+    }
+  }
 });
