@@ -4,11 +4,6 @@
   margin: 0;
   padding: 0;
 }
-.sidebar a.active {
-  background-color: #66c37d;
-  color: white;
-  border-radius: 8px;
-}
 
 .hidden {
   display: none;
