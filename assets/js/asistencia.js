@@ -1,21 +1,3 @@
-// Registro de asistencia
-
-// Lista general de estudiantes
-const estudiantes = [
-  { nombre: "Diego Jose Roque Tercero", carnet: "DJRT-43545-43545" },
-  { nombre: "Andrea López Méndez", carnet: "ALM-12345-78901" },
-  { nombre: "Carlos Pinto Rivera", carnet: "CPR-23456-89012" },
-  { nombre: "Marta Ávila Delgado", carnet: "MAD-34567-90123" },
-  { nombre: "Luis Fernando Núñez", carnet: "LFN-45678-01234" },
-  { nombre: "Julia Torres Vega", carnet: "JTV-56789-12345" },
-  { nombre: "Samuel Romero Ortega", carnet: "SRO-67890-23456" },
-  { nombre: "Natalia Díaz Paredes", carnet: "NDP-78901-34567" },
-  { nombre: "Eduardo Peralta Guzmán", carnet: "EPG-89012-45678" },
-  { nombre: "Gabriela Moreno Reyes", carnet: "GMR-90123-56789" },
-  { nombre: "Ana Karina Zepeda", carnet: "AKZ-01234-67890" },
-  { nombre: "Héctor Salazar Mejía", carnet: "HSM-12345-78901" }
-];
-
 // Definición de estados de asistencia
 const estadosAsistencia = {
   pendiente: { texto: "Pendiente", icono: "\u26A0", clase: "pendiente" },
@@ -23,6 +5,49 @@ const estadosAsistencia = {
   tardanza: { texto: "Tardanza", icono: "\u23F0", clase: "tardanza" },
   justificado: { texto: "Justificado", icono: "\u2709", clase: "justificado" },
   ausente: { texto: "Ausente", icono: "\u2B1B", clase: "ausente" }
+};
+
+const materias = ["prog-web", "prog-android", "prog-ios", "prog-py"];
+const grupos = ["grupo1", "grupo2", "grupo3"];
+
+// Genera 12 estudiantes únicos por materia y grupo
+function generarEstudiantes(materia, grupo) {
+  const nombresBase = [
+    "Diego Jose Roque Tercero", "Andrea López Méndez", "Carlos Pinto Rivera", "Marta Ávila Delgado",
+    "Luis Fernando Núñez", "Julia Torres Vega", "Samuel Romero Ortega", "Natalia Díaz Paredes",
+    "Eduardo Peralta Guzmán", "Gabriela Moreno Reyes", "Ana Karina Zepeda", "Héctor Salazar Mejía"
+  ];
+  return Array.from({ length: 12 }, (_, i) => ({
+    nombre: `${nombresBase[i]} (${materia.replace('prog-', '').toUpperCase()} ${grupo.toUpperCase()})`,
+    carnet: `${materia.toUpperCase()}-${grupo.toUpperCase()}-${(i + 1).toString().padStart(2, "0")}`
+  }));
+}
+
+// Estructura: estudiantesPorMateriaYGrupo[materia][grupo] = [estudiantes...]
+const estudiantesPorMateriaYGrupo = {};
+materias.forEach(materia => {
+  estudiantesPorMateriaYGrupo[materia] = {};
+  grupos.forEach(grupo => {
+    estudiantesPorMateriaYGrupo[materia][grupo] = generarEstudiantes(materia, grupo);
+  });
+});
+
+// Para "todas", une todos los estudiantes de todas las materias y grupos
+function obtenerTodosEstudiantes(grupo) {
+  let todos = [];
+  materias.forEach(materia => {
+    todos = todos.concat(estudiantesPorMateriaYGrupo[materia][grupo]);
+  });
+  return todos;
+}
+
+// Mapeo de valores del select a nombres descriptivos
+const nombreMaterias = {
+  "todas": "Todas las materias",
+  "prog-web": "Programación Web",
+  "prog-android": "Programación Android",
+  "prog-ios": "Programación iOS",
+  "prog-py": "Programación Python"
 };
 
 // Registro de la asistencia
@@ -46,25 +71,6 @@ function generarColor(nombre) {
   }
   return `hsl(${hash % 360}, 70%, 50%)`;
 }
-
-// Distribuir estudiantes en grupos según materia:
-// Dividimos la lista de 12 estudiantes en 4 grupos de 3 para asignarlos arbitrariamente a cada materia.
-const estudiantesPorMateria = {
-  "todas": estudiantes,
-  "prog-web": estudiantes.slice(0, 3),
-  "prog-android": estudiantes.slice(3, 6),
-  "prog-ios": estudiantes.slice(6, 9),
-  "prog-py": estudiantes.slice(9, 12)
-};
-
-// Mapeo de valores del select a nombres descriptivos
-const nombreMaterias = {
-  "todas": "Todas las materias",
-  "prog-web": "Programación Web",
-  "prog-android": "Programación Android",
-  "prog-ios": "Programación iOS",
-  "prog-py": "Programación Python"
-};
 
 // Función para crear la fila de la tabla para cada estudiante
 function crearFila(est) {
@@ -105,11 +111,15 @@ function actualizarEstado(selectEl, carnet) {
   };
 }
 
-// Carga los estudiantes en la tabla según el filtro de materia seleccionado
-function cargarEstudiantes(filtro = "todas") {
-  const lista = estudiantesPorMateria[filtro] || [];
+// Carga los estudiantes en la tabla según el filtro de materia y grupo seleccionados
+function cargarEstudiantes(materia = "todas", grupo = "grupo1") {
+  let lista = [];
+  if (materia === "todas") {
+    lista = obtenerTodosEstudiantes(grupo);
+  } else {
+    lista = estudiantesPorMateriaYGrupo[materia][grupo] || [];
+  }
   document.getElementById("tablaEstudiantes").innerHTML = lista.map(crearFila).join("");
-  // Actualiza el número total de estudiantes mostrados
   document.getElementById("total-estudiantes").textContent = `${lista.length} estudiantes`;
 }
 
@@ -125,7 +135,14 @@ function marcarTodosPresentes() {
 
 // Guarda el registro de asistencia
 function guardarTodo() {
-  const totalActual = Object.values(estudiantesPorMateria)[0].length; // total de estudiantes en "Todas"
+  const materia = document.getElementById("materia-toggle").value;
+  const grupo = document.getElementById("grupo-toggle").value;
+  let totalActual = 0;
+  if (materia === "todas") {
+    totalActual = obtenerTodosEstudiantes(grupo).length;
+  } else {
+    totalActual = estudiantesPorMateriaYGrupo[materia][grupo].length;
+  }
   const registrados = Object.keys(asistenciaRegistro).length;
   if (registrados < totalActual) {
     mostrarToast("No se pudo guardar: falta registrar asistencia.", "error");
@@ -170,16 +187,18 @@ flatpickr("#fecha-header", {
   }
 });
 
-// Evento para el cambio de materia en el select
-document.getElementById("materia-toggle").addEventListener("change", function() {
-  const valor = this.value;
-  // Carga la lista correspondiente de estudiantes
-  cargarEstudiantes(valor);
-  // Actualiza el subtítulo en el header
-  document.getElementById("materia-subtext").textContent = nombreMaterias[valor] || "Todas las materias";
-});
+// Evento para el cambio de materia o grupo en los selects
+function actualizarVista() {
+  const materia = document.getElementById("materia-toggle").value;
+  const grupo = document.getElementById("grupo-toggle").value;
+  cargarEstudiantes(materia, grupo);
+  document.getElementById("materia-subtext").textContent = nombreMaterias[materia] || "Todas las materias";
+}
 
-// Al cargar la página, inicializamos con "Todas las materias"
-cargarEstudiantes("todas");
+document.getElementById("materia-toggle").addEventListener("change", actualizarVista);
+document.getElementById("grupo-toggle").addEventListener("change", actualizarVista);
+
+// Inicializa con valores por defecto
 document.getElementById("materia-toggle").value = "todas";
-document.getElementById("materia-subtext").textContent = nombreMaterias["todas"];
+document.getElementById("grupo-toggle").value = "grupo1";
+actualizarVista();
