@@ -249,29 +249,49 @@ function actualizarEstadisticas() {
     if (contadores.hasOwnProperty(estado)) contadores[estado]++;
   });
   const actualizarCard = (clase, cantidad) => {
-    const card = document.querySelector(`.card.${clase}`);
+    // Cambia el selector para que coincida con las clases reales
+    const card = document.querySelector(`.estadistica-card.${clase}`);
     if (!card) return;
     const porcentaje = total ? Math.round((cantidad / total) * 100) : 0;
     card.querySelector(".porcentaje").textContent = `${porcentaje}%`;
     card.querySelector(".detalle").textContent = `${cantidad} de ${total} registros`;
   };
   actualizarCard("asistencia", contadores.presente);
-  actualizarCard("tardanzas", contadores.tardanza);
-  actualizarCard("ausencias", contadores.ausente);
-  actualizarCard("justificaciones", contadores.justificado);
+  actualizarCard("tardanza", contadores.tardanza);
+  actualizarCard("ausencia", contadores.ausente);
+  actualizarCard("justificacion", contadores.justificado);
 }
 
 function calcularEstadisticasPorEstudiante(estudiantes) {
-  // Simulación: todos tienen 0% (puedes adaptar según tus datos reales)
-  return estudiantes.map(est => ({
-    ...est,
-    presente: 0,
-    tardanza: 0,
-    ausente: 0,
-    justificado: 0,
-    asistencia: 0,
-    derechoExamen: "Sin datos"
-  }));
+  // Cuenta total de registros (para porcentajes)
+  const totalSesiones = 1; // Puedes cambiar esto si manejas varias fechas/sesiones
+
+  return estudiantes.map(est => {
+    const registro = asistenciaRegistro[est.carnet];
+    // Inicializa contadores
+    let presente = 0, tardanza = 0, ausente = 0, justificado = 0;
+
+    if (registro) {
+      if (registro.estado === "presente") presente = 1;
+      if (registro.estado === "tardanza") tardanza = 1;
+      if (registro.estado === "ausente") ausente = 1;
+      if (registro.estado === "justificado") justificado = 1;
+    }
+
+    // Calcula porcentajes (aquí solo hay una sesión, así que 0% o 100%)
+    const asistencia = ((presente + tardanza + justificado) / totalSesiones) * 100;
+    const derechoExamen = asistencia >= 80 ? "Sí" : "No";
+
+    return {
+      ...est,
+      presente: Math.round((presente / totalSesiones) * 100),
+      tardanza: Math.round((tardanza / totalSesiones) * 100),
+      ausente: Math.round((ausente / totalSesiones) * 100),
+      justificado: Math.round((justificado / totalSesiones) * 100),
+      asistencia: Math.round(asistencia),
+      derechoExamen
+    };
+  });
 }
 
 function renderEstadisticasPorEstudiante() {
