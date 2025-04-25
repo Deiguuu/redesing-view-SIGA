@@ -384,3 +384,56 @@ select.estado-toggle {
   margin-top: -24px;
   min-height: 100vh; /* Asegura que el contenido tenga altura mínima */
 }
+
+.estadisticas-cards-row {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.estadistica-card {
+  flex: 1 1 240px;
+  min-width: 240px;
+  max-width: 350px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px 20px;
+  box-shadow: 0 2px 8px rgba(52, 168, 83, 0.06);
+  border: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.estadistica-card.asistencia {
+  background: #e9f7f1;
+  border-color: #d6ede5;
+}
+.estadistica-card.tardanza {
+  background: #fffde7;
+  border-color: #f3f1c7;
+}
+.estadistica-card.ausencia {
+  background: #fff0f0;
+  border-color: #f3c7c7;
+}
+.estadistica-card.justificacion {
+  background: #f0f5ff;
+  border-color: #c7d4f3;
+}
+.estadistica-card .icon-bg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+}
+.estadistica-card.asistencia .icon-bg { background: #d6ede5; }
+.estadistica-card.tardanza .icon-bg { background: #f3f1c7; }
+.estadistica-card.ausencia .icon-bg { background: #f3c7c7; }
+.estadistica-card.justificacion .icon-bg { background: #c7d4f3; }

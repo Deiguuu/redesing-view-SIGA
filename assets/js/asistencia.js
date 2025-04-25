@@ -149,7 +149,7 @@ function cargarEstudiantes(materia = "todas", grupo = "grupo1") {
   } else {
     lista = estudiantesPorMateriaYGrupo[materia][grupo] || [];
   }
-  document.getElementById("tablaEstudiantes").innerHTML = lista.map(crearFila).join("");
+  document.getElementById("tablaEstudiantes").innerHTML = lista.map(crearFila).join("");  
   document.getElementById("total-estudiantes").textContent = `${lista.length} estudiantes`;
   actualizarEstadisticas();
 }
@@ -223,6 +223,7 @@ function actualizarVista() {
   localStorage.setItem("grupoSeleccionado", grupo);
   cargarEstudiantes(materia, grupo);
   document.getElementById("materia-subtext").textContent = nombreMaterias[materia] || "Todas las materias";
+  renderEstadisticasPorEstudiante(); // <-- Agregado
 }
 
 document.getElementById("materia-toggle").addEventListener("change", actualizarVista);
@@ -258,4 +259,52 @@ function actualizarEstadisticas() {
   actualizarCard("tardanzas", contadores.tardanza);
   actualizarCard("ausencias", contadores.ausente);
   actualizarCard("justificaciones", contadores.justificado);
+}
+
+function calcularEstadisticasPorEstudiante(estudiantes) {
+  // Simulación: todos tienen 0% (puedes adaptar según tus datos reales)
+  return estudiantes.map(est => ({
+    ...est,
+    presente: 0,
+    tardanza: 0,
+    ausente: 0,
+    justificado: 0,
+    asistencia: 0,
+    derechoExamen: "Sin datos"
+  }));
+}
+
+function renderEstadisticasPorEstudiante() {
+  const materia = document.getElementById("materia-toggle").value;
+  const grupo = document.getElementById("grupo-toggle").value;
+  let estudiantes = [];
+  if (materia === "todas") {
+    estudiantes = obtenerTodosEstudiantes(grupo);
+  } else {
+    estudiantes = estudiantesPorMateriaYGrupo[materia][grupo] || [];
+  }
+  const stats = calcularEstadisticasPorEstudiante(estudiantes);
+  const tbody = document.querySelector("#tablaEstadisticasEstudiantes tbody");
+  tbody.innerHTML = stats.map(est => `
+    <tr>
+      <td>
+        <div class="nombre-con-avatar">
+          <div class="avatar" style="background-color: ${generarColor(est.nombre)};">${obtenerIniciales(est.nombre)}</div>
+          <span>${est.nombre}</span>
+        </div>
+      </td>
+      <td>
+        <div style="background:#f3f3f3; border-radius:8px; height:8px; width:100%; margin:8px 0;">
+          <div style="background:#4b62d9; height:8px; border-radius:8px; width:${est.asistencia}%;"></div>
+        </div>
+      </td>
+      <td>${est.presente}%</td>
+      <td>${est.tardanza}%</td>
+      <td>${est.ausente}%</td>
+      <td>${est.justificado}%</td>
+      <td>
+        <span class="pill">${est.derechoExamen}</span>
+      </td>
+    </tr>
+  `).join("");
 }
