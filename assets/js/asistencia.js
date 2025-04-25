@@ -98,7 +98,7 @@ function obtenerIniciales(nombre) {
 
 function generarColor(nombre) {
   let hash = 0;
-  for (let i = 0; i < nombre.length; i++) {
+  for (let i = 0; i < nombre.length; i++) { // <-- Corrección aquí
     hash = nombre.charCodeAt(i) + ((hash << 5) - hash);
   }
   return `hsl(${hash % 360}, 70%, 50%)`;
@@ -107,6 +107,9 @@ function generarColor(nombre) {
 function crearFila(est) {
   const iniciales = obtenerIniciales(est.nombre);
   const color = generarColor(est.nombre);
+
+  const carnetParts = est.carnet.split("-");
+  const carnetNum = `${Math.floor(Math.random()*90000+10000)}-${Math.floor(Math.random()*900000+100000)}`;
   return `
     <tr>
       <td>
@@ -114,7 +117,9 @@ function crearFila(est) {
           <div class="avatar" style="background-color: ${color};">${iniciales}</div>
           <div>
             <strong>${est.nombre}</strong><br>
-            <span style="color: #888; font-size: 0.85rem;">${est.carnet}</span>
+            <span style="color: #888; font-size: 0.85rem;">
+              carnet ${iniciales} ${carnetNum}
+            </span>
           </div>
         </div>
       </td>
@@ -140,6 +145,8 @@ function actualizarEstado(selectEl, carnet) {
     observacion: document.getElementById(`obs-${carnet}`).value
   };
   actualizarEstadisticas();
+  renderSinDatos();
+  renderEstadoEstudiantesFichas(); // <-- Agregado aquí
 }
 
 function cargarEstudiantes(materia = "todas", grupo = "grupo1") {
@@ -223,7 +230,9 @@ function actualizarVista() {
   localStorage.setItem("grupoSeleccionado", grupo);
   cargarEstudiantes(materia, grupo);
   document.getElementById("materia-subtext").textContent = nombreMaterias[materia] || "Todas las materias";
-  renderEstadisticasPorEstudiante(); // <-- Agregado
+  renderEstadisticasPorEstudiante();
+  renderSinDatos();
+  renderEstadoEstudiantesFichas(); // <-- Agregado aquí
 }
 
 document.getElementById("materia-toggle").addEventListener("change", actualizarVista);
@@ -327,4 +336,86 @@ function renderEstadisticasPorEstudiante() {
       </td>
     </tr>
   `).join("");
+}
+
+function renderSinDatos() {
+  const materia = document.getElementById("materia-toggle").value;
+  const grupo = document.getElementById("grupo-toggle").value;
+  let estudiantes = [];
+  if (materia === "todas") {
+    estudiantes = obtenerTodosEstudiantes(grupo);
+  } else {
+    estudiantes = estudiantesPorMateriaYGrupo[materia][grupo] || [];
+  }
+  // Filtra los que no tienen registro de asistencia
+  const sinDatos = estudiantes.filter(est => !asistenciaRegistro[est.carnet]);
+  const listaDiv = document.getElementById("sin-datos-lista");
+  const countSpan = document.getElementById("sin-datos-count");
+  countSpan.textContent = `${sinDatos.length} estudiante${sinDatos.length !== 1 ? 's' : ''}`;
+  if (sinDatos.length === 0) {
+    listaDiv.innerHTML = `<div style="padding:12px; color:#888; text-align:center;">Todos los estudiantes tienen registro de asistencia</div>`;
+    return;
+  }
+  listaDiv.innerHTML = sinDatos.map(est => `
+    <div style="display:flex; align-items:center; justify-content:space-between; padding:12px;">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div class="avatar" style="background-color:${generarColor(est.nombre)};width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:14px;color:#fff;">
+          ${obtenerIniciales(est.nombre)}
+        </div>
+        <div style="font-size:12px;">
+          <p style="font-weight:600; color:#222; margin:0;">${est.nombre}</p>
+          <p style="color:#888; margin:0;">${grupo.replace('grupo', 'Grupo ').toUpperCase()}</p>
+        </div>
+      </div>
+      <span style="font-size:12px; color:#666; border:1px solid #ccc; border-radius:9999px; padding:2px 8px;">Sin datos</span>
+    </div>
+  `).join('');
+}
+
+function renderEstadoEstudiantesFichas() {
+  const materia = document.getElementById("materia-toggle").value;
+  const grupo = document.getElementById("grupo-toggle").value;
+  let estudiantes = [];
+  if (materia === "todas") {
+    estudiantes = obtenerTodosEstudiantes(grupo);
+  } else {
+    estudiantes = estudiantesPorMateriaYGrupo[materia][grupo] || [];
+  }
+  const stats = calcularEstadisticasPorEstudiante(estudiantes);
+
+  // Habilitados
+  const habilitados = stats.filter(est => est.derechoExamen === "Sí");
+  const habilitadosCount = habilitados.length;
+  const habilitadosSpan = document.querySelector(
+    '#estado-estudiantes-fichas section:nth-child(1) header span'
+  );
+  if (habilitadosSpan) {
+    habilitadosSpan.textContent = `${habilitadosCount} estudiante${habilitadosCount !== 1 ? 's' : ''}`;
+  }
+  const habilitadosMsg = document.querySelector(
+    '#estado-estudiantes-fichas section:nth-child(1) div[style*="flex-grow"]'
+  );
+  if (habilitadosMsg) {
+    habilitadosMsg.textContent = habilitadosCount === 0
+      ? "No hay estudiantes habilitados para examen"
+      : habilitados.map(est => est.nombre).join(', ');
+  }
+
+  // En Riesgo
+  const enRiesgo = stats.filter(est => est.derechoExamen === "No" && asistenciaRegistro[est.carnet]);
+  const enRiesgoCount = enRiesgo.length;
+  const enRiesgoSpan = document.querySelector(
+    '#estado-estudiantes-fichas section:nth-child(2) header span'
+  );
+  if (enRiesgoSpan) {
+    enRiesgoSpan.textContent = `${enRiesgoCount} estudiante${enRiesgoCount !== 1 ? 's' : ''}`;
+  }
+  const enRiesgoMsg = document.querySelector(
+    '#estado-estudiantes-fichas section:nth-child(2) div[style*="flex-grow"]'
+  );
+  if (enRiesgoMsg) {
+    enRiesgoMsg.textContent = enRiesgoCount === 0
+      ? "No hay estudiantes en riesgo de perder el derecho a examen"
+      : enRiesgo.map(est => est.nombre).join(', ');
+  }
 }

@@ -206,6 +206,53 @@
           </table>
         </div>
       </div>
+
+      <div class="tab-content hidden" id="reportes-content" style="margin-top: 20px">
+        <!-- Aquí puedes poner tu contenido de reportes existente si tienes -->
+
+        <!-- Fichas de Estado de Estudiantes -->
+        <div id="estado-estudiantes-fichas" style="margin-top:24px;">
+          <div style="display:flex; flex-wrap:wrap; gap:24px;">
+            <!-- Habilitados -->
+            <section style="background:#e6f9e9; border-radius:16px; padding:24px 20px; flex:1 1 240px; min-width:280px; box-shadow:0 2px 8px rgba(52,168,83,0.06); display:flex; flex-direction:column;">
+              <header style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
+                <h2 style="color:#2f7a2f; font-weight:600; font-size:14px; display:flex; align-items:center; gap:6px;">
+                  <i class="fas fa-check" style="color:#2f7a2f;"></i> Habilitados
+                </h2>
+                <span style="background:#fff; font-size:12px; color:#666; border-radius:9999px; padding:2px 8px; border:1px solid #ccc;">0 estudiantes</span>
+              </header>
+              <p style="font-size:12px; color:#4a4a4a; margin-bottom:12px;">Estudiantes con derecho a examen</p>
+              <div style="flex-grow:1; text-align:center; font-size:12px; color:#888; padding-top:24px;">
+                No hay estudiantes habilitados para examen
+              </div>
+            </section>
+            <!-- En Riesgo -->
+            <section style="background:#ffe6e3; border-radius:16px; padding:24px 20px; flex:1 1 240px; min-width:280px; box-shadow:0 2px 8px rgba(52,168,83,0.06); display:flex; flex-direction:column;">
+              <header style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
+                <h2 style="color:#b33a2a; font-weight:600; font-size:14px; display:flex; align-items:center; gap:6px;">
+                  <i class="fas fa-exclamation-triangle" style="color:#b33a2a;"></i> En Riesgo
+                </h2>
+                <span style="background:#fff; font-size:12px; color:#666; border-radius:9999px; padding:2px 8px; border:1px solid #ccc;">0 estudiantes</span>
+              </header>
+              <p style="font-size:12px; color:#4a4a4a; margin-bottom:12px;">Estudiantes sin derecho a examen</p>
+              <div style="flex-grow:1; text-align:center; font-size:12px; color:#888; padding-top:24px;">
+                No hay estudiantes en riesgo de perder el derecho a examen
+              </div>
+            </section>
+            <!-- Sin Datos -->
+            <section style="background:#f4f9f8; border-radius:16px; padding:24px 20px; flex:1 1 240px; min-width:280px; box-shadow:0 2px 8px rgba(52,168,83,0.06); display:flex; flex-direction:column;">
+              <header style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
+                <h2 style="color:#4a4a4a; font-weight:600; font-size:14px; display:flex; align-items:center; gap:6px;">
+                  <i class="fas fa-info-circle" style="color:#4a4a4a;"></i> Sin Datos
+                </h2>
+                <span id="sin-datos-count" style="background:#fff; font-size:12px; color:#666; border-radius:9999px; padding:2px 8px; border:1px solid #ccc;">0 estudiantes</span>
+              </header>
+              <p style="font-size:12px; color:#4a4a4a; margin-bottom:12px;">Estudiantes sin registros de asistencia</p>
+              <div id="sin-datos-lista" style="background:#fff; border:1px solid #eee; border-radius:12px;"></div>
+            </section>
+          </div>
+        </div>
+      </div>
     </main>
   </div>
 
