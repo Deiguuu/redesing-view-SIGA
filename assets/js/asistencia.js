@@ -391,14 +391,26 @@ function renderEstadoEstudiantesFichas() {
   );
   if (habilitadosSpan) {
     habilitadosSpan.textContent = `${habilitadosCount} estudiante${habilitadosCount !== 1 ? 's' : ''}`;
-  }
-  const habilitadosMsg = document.querySelector(
-    '#estado-estudiantes-fichas section:nth-child(1) div[style*="flex-grow"]'
-  );
-  if (habilitadosMsg) {
-    habilitadosMsg.textContent = habilitadosCount === 0
-      ? "No hay estudiantes habilitados para examen"
-      : habilitados.map(est => est.nombre).join(', ');
+  }  const habilitadosLista = document.getElementById("habilitados-lista");
+  if (habilitadosLista) {
+    if (habilitadosCount === 0) {
+      habilitadosLista.innerHTML = `<div style="padding:12px; color:#888; text-align:center;">No hay estudiantes habilitados para examen</div>`;
+    } else {
+      habilitadosLista.innerHTML = habilitados.map(est => `
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:12px;">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div class="avatar" style="background-color:${generarColor(est.nombre)};width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:14px;color:#fff;">
+              ${obtenerIniciales(est.nombre)}
+            </div>
+            <div style="font-size:12px;">
+              <p style="font-weight:600; color:#222; margin:0;">${est.nombre}</p>
+              <p style="color:#888; margin:0;">${grupo.replace('grupo', 'Grupo ').toUpperCase()}</p>
+            </div>
+          </div>
+          <span style="font-size:12px; color:#2f7a2f; border:1px solid #2f7a2f; border-radius:9999px; padding:2px 8px;">Habilitado</span>
+        </div>
+      `).join('');
+    }
   }
 
   // En Riesgo
@@ -410,12 +422,25 @@ function renderEstadoEstudiantesFichas() {
   if (enRiesgoSpan) {
     enRiesgoSpan.textContent = `${enRiesgoCount} estudiante${enRiesgoCount !== 1 ? 's' : ''}`;
   }
-  const enRiesgoMsg = document.querySelector(
-    '#estado-estudiantes-fichas section:nth-child(2) div[style*="flex-grow"]'
-  );
-  if (enRiesgoMsg) {
-    enRiesgoMsg.textContent = enRiesgoCount === 0
-      ? "No hay estudiantes en riesgo de perder el derecho a examen"
-      : enRiesgo.map(est => est.nombre).join(', ');
+  const enRiesgoLista = document.getElementById("en-riesgo-lista");
+  if (enRiesgoLista) {
+    if (enRiesgoCount === 0) {
+      enRiesgoLista.innerHTML = `<div style="padding:12px; color:#888; text-align:center;">No hay estudiantes en riesgo de perder el derecho a examen</div>`;
+    } else {
+      enRiesgoLista.innerHTML = enRiesgo.map(est => `
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:12px;">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div class="avatar" style="background-color:${generarColor(est.nombre)};width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:14px;color:#fff;">
+              ${obtenerIniciales(est.nombre)}
+            </div>
+            <div style="font-size:12px;">
+              <p style="font-weight:600; color:#222; margin:0;">${est.nombre}</p>
+              <p style="color:#888; margin:0;">${grupo.replace('grupo', 'Grupo ').toUpperCase()}</p>
+            </div>
+          </div>
+          <span style="font-size:12px; color:#b33a2a; border:1px solid #b33a2a; border-radius:9999px; padding:2px 8px;">En riesgo</span>
+        </div>
+      `).join('');
+    }
   }
 }
