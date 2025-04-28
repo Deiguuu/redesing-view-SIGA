@@ -1,3 +1,4 @@
+/* ==== Reset General ==== */
 * {
   font-family: 'Inter', sans-serif;
   box-sizing: border-box;
@@ -9,180 +10,13 @@ body {
   background-color: #f5f5f5;
 }
 
-/* Estilos para organizar el header */
+/* ==== Header Principal ==== */
 .header-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start; /* Corregido: todos a la izquierda */
   align-items: center;
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.header-icon {
-  background: black;
-  border-radius: 999px;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.header-text h1 {
-  margin: 0;
-  font-size: 24px;
-}
-
-.header-text p {
-  margin: 0;
-  font-size: 14px;
-  color: #666;
-}
-
-/* Estilos de los botones que insertamos */
-.header-buttons {
-  display: flex;
-  justify-content: flex-end; /* Alineamos los botones al final */
-  align-items: center;
-  gap: 10px; /* Espacio entre los elementos */
-}
-
-/* Cambios realizados: Reordenar el buscador y selector de mes */
-.search-container {
-  order: 1; /* Buscador primero */
-  display: flex;
-  align-items: center;
-  margin-right: 10px; /* Margen derecho entre el buscador y el siguiente botón */
-}
-
-.view-selector {
-  order: 2; /* Selector de mes después del buscador */
-  margin-left: 10px;
-}
-
-.new-event-btn {
-  margin-left: 10px; /* Espacio entre el selector de vista y el botón nuevo evento */
-}
-
-.view-btn {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.new-event-btn {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  cursor: pointer;
-}
-
-.new-event-btn:hover {
-  background-color: #45a049;
-}
-
-.search-container,
-.view-selector,
-.new-event-btn {
-  display: flex;
-  align-items: center;
-  background: #f1f1f1;
-  border-radius: 999px;
-  padding: 8px 16px;
-  height: 42px;
-  transition: background 0.3s ease;
-}
-
-.search-container:hover,
-.view-selector:hover,
-.new-event-btn:hover {
-  background: #e0e0e0;
-}
-
-.search-container .icon {
-  width: 20px;
-  height: 20px;
-  margin-right: 8px;
-  color: #888;
-}
-
-#searchInput {
-  border: none;
-  background: transparent;
-  outline: none;
-  width: 100%;
-  font-size: 14px;
-}
-
-.view-btn {
-  background: transparent;
-  border: none;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  color: #555;
-  cursor: pointer;
-}
-
-.dropdown-icon {
-  width: 16px;
-  height: 16px;
-  color: #666;
-}
-
-.view-dropdown {
-  display: none;
-  position: absolute;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  overflow: hidden;
-  min-width: 120px;
-  margin-top: 8px;
-  z-index: 10;
-}
-
-.view-option {
-  padding: 10px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.view-option:hover {
-  background: #f1f1f1;
-}
-
-.new-event-btn {
-  background: black;
-  color: white;
-  font-size: 14px;
-  padding: 8px 20px;
-  border: none;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.3s ease;
-}
-
-.new-event-btn:hover {
-  background: #333;
-  transform: scale(1.05);
-}
-
-.header-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #fff;
-  border-radius: 0 0 40px 40px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-  padding: 20px 32px;
-  margin-bottom: 24px;
+  gap: 24px; /* Espaciado entre bloques */
+  flex-wrap: wrap; /* Para responsive */
 }
 
 .header-left {
@@ -222,19 +56,199 @@ body {
   display: none;
 }
 
-@media (max-width: 700px) {
-  .header-card {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 16px 8px;
-    border-radius: 0 0 24px 24px;
-  }
-
-  .header-left {
-    gap: 8px;
-  }
+/* ==== Header Card ==== */
+.header-card {
+  display: flex;
+  justify-content: flex-start; /* Corregido: todo a la izquierda */
+  align-items: center;
+  background: #fff;
+  border-radius: 0 0 40px 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  padding: 20px 32px;
+  margin-bottom: 24px;
+  flex-wrap: wrap; /* Para pantallas pequeñas */
+  gap: 24px; /* Espaciado general */
 }
 
+/* ==== Header Buttons ==== */
+.header-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ==== Buscador ==== */
+.search-container {
+  order: 1;
+  display: flex;
+  align-items: center;
+  background: #f1f1f1;
+  border-radius: 999px;
+  padding: 8px 16px;
+  height: 42px;
+  margin-right: 10px;
+  transition: background 0.3s ease;
+}
+
+.search-container:hover {
+  background: #e0e0e0;
+}
+
+.search-container .icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  color: #888;
+}
+
+#searchInput {
+  border: none;
+  background: transparent;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+}
+
+/* ==== Selector de Vista (Dropdown) ==== */
+.view-selector {
+  order: 2;
+  position: relative;
+  margin-left: 10px;
+  background: #f1f1f1;
+  border-radius: 999px;
+  padding: 8px 16px;
+  height: 42px;
+  transition: background 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.view-selector:hover {
+  background: #e0e0e0;
+}
+
+.view-btn {
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #555;
+  cursor: pointer;
+}
+
+.dropdown-icon {
+  width: 16px;
+  height: 16px;
+  color: #666;
+}
+
+.view-dropdown {
+  display: none;
+  position: absolute;
+  top: 110%;
+  left: 0;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+  min-width: 120px;
+  margin-top: 8px;
+  z-index: 10;
+}
+
+.view-option {
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.view-option:hover {
+  background: #f1f1f1;
+}
+
+/* ==== Botón Nuevo Evento ==== */
+.new-event-btn {
+  margin-left: 10px;
+  background: black;
+  color: white;
+  font-size: 14px;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.new-event-btn:hover {
+  background: #333;
+  transform: scale(1.05);
+}
+
+/* ==== Control de Mes ==== */
+.month-control {
+  display: flex;
+  align-items: center;
+  background: #f1f1f1;
+  border-radius: 999px;
+  padding: 8px 16px;
+  gap: 8px;
+  height: 42px;
+  transition: background 0.3s ease;
+}
+
+.month-control:hover {
+  background: #e0e0e0;
+}
+
+.icon-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 5px;
+  transition: background 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-button:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.icon-button svg {
+  width: 20px;
+  height: 20px;
+  color: #555;
+}
+
+.month-text {
+  font-size: 14px;
+  color: #555;
+  font-weight: 500;
+}
+
+/* ==== Botón Hoy ==== */
+.today-btn {
+  background: #ddd;
+  border: none;
+  border-radius: 999px;
+  font-size: 14px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.today-btn:hover {
+  background: #ccc;
+  transform: scale(1.05);
+}
+
+/* ==== Sidebar y Layout ==== */
 .layout {
   display: flex;
   gap: 24px;
@@ -280,61 +294,17 @@ body {
   margin-top: -24px;
 }
 
-/* ---- Control del Mes ---- */
-.month-control {
-  display: flex;
-  align-items: center;
-  background: #f1f1f1;
-  border-radius: 999px;
-  padding: 8px 16px;
-  gap: 8px;
-  height: 42px; /* Igualamos altura al resto de botones */
-  transition: background 0.3s ease;
-}
+/* ==== Responsive ==== */
+@media (max-width: 700px) {
+  .header-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 8px;
+    border-radius: 0 0 24px 24px;
+    gap: 16px; /* Agregado para mejor separación */
+  }
 
-.month-control:hover {
-  background: #e0e0e0;
-}
-
-.icon-button {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  border-radius: 999px;
-  padding: 5px;
-  transition: background 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.icon-button:hover {
-  background: rgba(0, 0, 0, 0.05);
-}
-
-.icon-button svg {
-  width: 20px;
-  height: 20px;
-  color: #555;
-}
-
-.month-text {
-  font-size: 14px;
-  color: #555;
-  font-weight: 500;
-}
-
-.today-btn {
-  background: #ddd;
-  border: none;
-  border-radius: 999px;
-  font-size: 14px;
-  padding: 8px 16px;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.3s ease;
-}
-
-.today-btn:hover {
-  background: #ccc;
-  transform: scale(1.05);
+  .header-left {
+    gap: 8px;
+  }
 }
