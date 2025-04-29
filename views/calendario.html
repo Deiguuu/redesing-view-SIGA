@@ -93,6 +93,34 @@
       <a href="#"><i class="fas fa-clipboard-list"></i></a>
       <a href="#"><i class="fas fa-file-alt"></i></a>
     </nav>
+    
+    <!-- Calendario a la derecha del sidebar -->
+    <div class="calendar-container" style="margin-left: 240px; padding-top: 20px;">
+      <div class="controls">
+        <div>
+          <button id="today-btn">Hoy</button>
+          <button id="prev-btn">Anterior</button>
+          <button id="next-btn">Siguiente</button>
+        </div>
+        <div>
+          <button id="month-view-btn">Mes</button>
+          <button id="day-view-btn">Día</button>
+          <button id="week-view-btn">Semana</button>
+          <button id="agenda-view-btn">Agenda</button>
+        </div>
+      </div>
+      <div class="header" id="current-month">Abril 2025</div>
+      <div class="weekdays" id="weekdays-row">
+        <div>Dom</div><div>Lun</div><div>Mar</div><div>Mié</div><div>Jue</div><div>Vie</div><div>Sáb</div>
+      </div>
+      <div class="days" id="calendar-days"></div>
+
+      <div id="views-container">
+        <div class="day-view" id="day-view" style="display: none;"></div>
+        <div class="week-view" id="week-view" style="display: none;"></div>
+        <div class="agenda-view" id="agenda-view" style="display: none;"></div>
+      </div>
+    </div>
   </div>
 
   <!-- Script al final del documento -->
