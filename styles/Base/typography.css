@@ -1,0 +1,57 @@
+@font-face {
+    font-family: 'Satoshi';
+    src: url('/assets/Fonts/Satoshi-LightItalic.otf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+body {
+    font-family: 'Satoshi', sans-serif;
+    color: #111;
+  }
+  
+  .title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    justify-content: center;
+    color: #198754;
+    margin-bottom: -60px;
+    margin-top: 10px;
+    width: 40%;
+  }
+  
+  .green {
+    color: green;
+  }
+  
+  .first-letter{
+    font-size: 48px;
+    font-weight: 400;
+    color : #198754;
+    font-weight: bold; 
+  }
+
+  .line-break{
+    display: block;
+    margin-top: 2.5px;
+  }
+  .form-title{
+    margin-top: 20px;
+    font-weight: bold;
+  }
+
+  h2{
+    font-family: var(--default-login,"-",sans-serif);
+    font-size: 48px;
+    font-weight: 400;
+    position: relative;
+    height: 172px;
+  }
+  .remember-text {
+    font-size: 0.8rem;
+    color: #666; 
+    margin-left: 0; 
+  }
+
+
+

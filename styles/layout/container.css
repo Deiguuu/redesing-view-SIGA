@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  background-color: #ffff;
+}
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin: auto;
+  height: 100vh;
+  background-color: #ffff;
+}
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    background-color: #FFFFFF;
+    overflow: hidden;
+    padding: 20px;
+  }
+  

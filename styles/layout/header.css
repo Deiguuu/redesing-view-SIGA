@@ -1,0 +1,9 @@
+.content-container {
+  background: radial-gradient(circle, #c0f2c0 , #FFFFFF 100%, #FFFFFF 100%);
+  color: #333; /* Texto oscuro para contraste */
+  padding: 10px 20px;
+  text-align: left;
+  border-radius: 50px;
+  font-size: 1.5rem;  
+  margin-bottom: 50px; 
+}

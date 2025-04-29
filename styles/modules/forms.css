@@ -1,0 +1,34 @@
+.form-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  font-size: 48px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.form-group input {
+  width: 40%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+.remember-container {
+  display: flex;
+  align-items: center; 
+  gap: 5px; 
+  margin-top: 15px;
+}
+
+.remember-container input[type="checkbox"] {
+  width: 16px; /* Tamaño del checkbox */
+  height: 16px; /* Tamaño del checkbox */
+  transform: scale(0.8);
+  margin-top: 0;
+  position: left;
+  top: 2px;
+}
