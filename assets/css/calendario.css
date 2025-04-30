@@ -157,7 +157,7 @@ body {
   overflow: hidden;
   min-width: 120px;
   margin-top: 8px;
-  z-index: 10;
+  z-index: 200; /* <-- Aumenta el z-index aquí */
 }
 
 .view-option {
@@ -410,13 +410,11 @@ body {
   width: calc(100% - 8px);
   color: #004085;
 }
-
 .special-event {
   background: #fff3e0;
   border-left-color: #ff9f0a;
   color: #664d03;
 }
-
 .other-event {
   background: #e9ffeb;
   border-left-color: #4cd964;
@@ -717,7 +715,7 @@ body {
         }
     }
 .calendar-summary {
-  position: fixed;
+  position: static;
   top: 110px;   /* Ajusta este valor para que coincida con el inicio del calendario */
   left: auto;
   right: 40px;

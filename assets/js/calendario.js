@@ -48,28 +48,48 @@ todayBtn.addEventListener('click', () => {
 updateMonthDisplay();
 
 // Selector de vista
-const viewToggle = document.getElementById('viewToggle');
-const viewDropdown = document.getElementById('viewDropdown');
-const currentView = document.getElementById('currentView');
+document.addEventListener('DOMContentLoaded', function () {
+  const viewToggle = document.getElementById('viewToggle');
+  const viewDropdown = document.getElementById('viewDropdown');
+  const currentView = document.getElementById('currentView');
+  const views = {
+    'Mes': document.getElementById('calendar-days').parentElement, // Mes es el grid principal
+    'Semana': document.getElementById('week-view'),
+    'Día': document.getElementById('day-view'),
+    'Agenda': document.getElementById('agenda-view')
+  };
 
-viewToggle.addEventListener('click', () => {
-  viewDropdown.style.display = viewDropdown.style.display === 'block' ? 'none' : 'block';
-});
+  // Mostrar/ocultar el dropdown
+  viewToggle.addEventListener('click', function (e) {
+    e.stopPropagation();
+    viewDropdown.style.display = viewDropdown.style.display === 'block' ? 'none' : 'block';
+  });
 
-// Cambiar vista
-document.querySelectorAll('.view-option').forEach(option => {
-  option.addEventListener('click', (e) => {
-    const selectedView = e.target.getAttribute('data-view');
-    currentView.textContent = selectedView;
+  // Cambiar de vista al hacer click en una opción
+  viewDropdown.querySelectorAll('.view-option').forEach(option => {
+    option.addEventListener('click', function () {
+      const selected = this.getAttribute('data-view');
+      currentView.textContent = selected;
+
+      // Llama a la función de renderizado adecuada
+      if (selected === 'Mes') {
+        renderMonthView(currentDate);
+      } else if (selected === 'Semana') {
+        renderWeekView(currentDate);
+      } else if (selected === 'Día') {
+        renderDayView(currentDate);
+      } else if (selected === 'Agenda') {
+        renderAgendaView(currentDate);
+      }
+
+      viewDropdown.style.display = 'none';
+    });
+  });
+
+  // Cierra el dropdown si haces click fuera
+  document.addEventListener('click', function () {
     viewDropdown.style.display = 'none';
   });
-});
-
-// Cerrar dropdown al hacer click afuera
-document.addEventListener('click', (e) => {
-  if (!viewToggle.contains(e.target) && !viewDropdown.contains(e.target)) {
-    viewDropdown.style.display = 'none';
-  }
 });
 
 const calendarDaysDiv = document.getElementById('calendar-days');
@@ -82,6 +102,20 @@ const weekView = document.getElementById('week-view');
 const agendaView = document.getElementById('agenda-view');
 
 const events = [
+  { date: new Date(2025, 0, 15, 10), title: 'Entrega de planeación semestral', type: 'other' },           // Enero
+  { date: new Date(2025, 1, 10, 9), title: 'Reunión de academia', type: 'other' },                        // Febrero
+  { date: new Date(2025, 2, 5, 12), title: 'Entrega de calificaciones parciales', type: 'special' },      // Marzo
+  { date: new Date(2025, 3, 20, 11), title: 'Capacitación docente', type: 'special' },                    // Abril
+  { date: new Date(2025, 4, 8, 16), title: 'Evaluación docente', type: 'special' },                       // Mayo
+  { date: new Date(2025, 5, 18, 10), title: 'Entrega de trabajos finales', type: 'class' },               // Junio
+  { date: new Date(2025, 6, 2, 9), title: 'Inicio de cursos de verano', type: 'class' },                  // Julio
+  { date: new Date(2025, 7, 25, 13), title: 'Cierre de actas', type: 'special' },                         // Agosto
+  { date: new Date(2025, 8, 12, 10), title: 'Reunión de consejo técnico', type: 'other' },                // Septiembre
+  { date: new Date(2025, 9, 7, 15), title: 'Entrega de exámenes extraordinarios', type: 'special' },      // Octubre
+  { date: new Date(2025, 10, 22, 11), title: 'Junta de planeación académica', type: 'other' },            // Noviembre
+  { date: new Date(2025, 11, 14, 17), title: 'Cierre de ciclo escolar', type: 'special' },                // Diciembre
+
+  // ...tus eventos existentes...
   { date: new Date(2025, 3, 2, 9), title: 'Matemáticas Avanzadas', type: 'class' },
   { date: new Date(2025, 3, 2, 11), title: 'Programación Orientada a Objetos', type: 'class' },
   { date: new Date(2025, 3, 3, 10), title: 'Cálculo Diferencial', type: 'class' },
@@ -288,7 +322,22 @@ document.getElementById('month-view-btn').addEventListener('click', () => change
 document.getElementById('day-view-btn').addEventListener('click', () => changeView('day'));
 document.getElementById('week-view-btn').addEventListener('click', () => changeView('week'));
 document.getElementById('agenda-view-btn').addEventListener('click', () => changeView('agenda'));
-// Agrega al final de calendario.js
+
+// Define la función getEventTypeLabel
+function getEventTypeLabel(type) {
+  switch (type) {
+    case 'class':
+      return 'Clase';
+    case 'special':
+      return 'Actividad';
+    case 'other':
+      return 'Reunión';
+    case 'exam': // Incluir si planeas usar este tipo
+      return 'Examen';
+    default:
+      return 'General'; // Tipo por defecto si no coincide con nada
+  }
+}
 
 // --- Resumen del Calendario (ventana flotante) ---
 const summaryTabs = document.querySelectorAll('.summary-tab');
@@ -455,33 +504,124 @@ function showEventModal(event = null, index = null) {
     modal = document.createElement('div');
     modal.id = 'event-modal';
     modal.innerHTML = `
-      <div class="modal-content">
-        <h3 id="modal-title">Nuevo Evento</h3>
-        <form id="event-form">
-          <label>Título: <input type="text" id="event-title" required></label><br>
-          <label>Fecha: <input type="date" id="event-date" required></label><br>
-          <label>Hora: <input type="time" id="event-time"></label><br>
-          <label>Tipo:
-            <select id="event-type">
+      <div class="macos-modal-content">
+        <h3 id="modal-title" class="macos-modal-title">Nuevo Evento</h3>
+        <form id="event-form" autocomplete="off">
+          <label class="macos-label">
+            <span>Título</span>
+            <input type="text" id="event-title" required class="macos-input">
+          </label>
+          <label class="macos-label">
+            <span>Fecha</span>
+            <input type="date" id="event-date" required class="macos-input">
+          </label>
+          <label class="macos-label">
+            <span>Hora</span>
+            <input type="time" id="event-time" class="macos-input">
+          </label>
+          <label class="macos-label">
+            <span>Tipo</span>
+            <select id="event-type" class="macos-input">
               <option value="class">Clase</option>
               <option value="special">Actividad</option>
               <option value="other">Reunión</option>
             </select>
-          </label><br>
-          <div style="margin-top:10px;">
-            <button type="submit" id="save-event-btn">Guardar</button>
-            <button type="button" id="cancel-event-btn">Cancelar</button>
-            <button type="button" id="delete-event-btn" style="display:none;color:red;">Eliminar</button>
+          </label>
+          <div class="macos-modal-actions">
+            <button type="submit" id="save-event-btn" class="macos-btn macos-btn-primary">Guardar</button>
+            <button type="button" id="cancel-event-btn" class="macos-btn">Cancelar</button>
+            <button type="button" id="delete-event-btn" class="macos-btn macos-btn-danger" style="display:none;">Eliminar</button>
           </div>
         </form>
       </div>
       <style>
         #event-modal {
           position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-          background: rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; z-index: 1000;
+          background: rgba(30,34,40,0.18); display: flex; align-items: center; justify-content: center; z-index: 1000;
+          backdrop-filter: blur(2px);
         }
-        #event-modal .modal-content {
-          background: #fff; padding: 20px 30px; border-radius: 8px; min-width: 300px;
+        .macos-modal-content {
+          background: #f8f8fa;
+          border-radius: 16px;
+          box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+          min-width: 320px;
+          padding: 32px 28px 22px 28px;
+          display: flex;
+          flex-direction: column;
+          gap: 18px;
+          border: 1px solid #e0e0e5;
+          font-family: 'Satoshi', 'San Francisco', 'Segoe UI', Arial, sans-serif;
+        }
+        .macos-modal-title {
+          font-size: 1.25em;
+          font-weight: 600;
+          color: #222;
+          margin-bottom: 8px;
+          letter-spacing: 0.01em;
+          text-align: center;
+        }
+        .macos-label {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+          font-size: 0.98em;
+          color: #444;
+          margin-bottom: 8px;
+        }
+        .macos-input {
+          border: 1px solid #d1d1d6;
+          border-radius: 8px;
+          padding: 8px 12px;
+          font-size: 1em;
+          background: #fff;
+          color: #222;
+          transition: border 0.2s;
+          outline: none;
+          margin-top: 2px;
+        }
+        .macos-input:focus {
+          border: 1.5px solid #007aff;
+          background: #f4f8ff;
+        }
+        .macos-modal-actions {
+          display: flex;
+          gap: 10px;
+          justify-content: flex-end;
+          margin-top: 10px;
+        }
+        .macos-btn {
+          border: none;
+          border-radius: 8px;
+          padding: 7px 18px;
+          font-size: 1em;
+          background: #ececf0;
+          color: #222;
+          cursor: pointer;
+          transition: background 0.18s, color 0.18s;
+          font-weight: 500;
+        }
+        .macos-btn-primary {
+          background: #007aff;
+          color: #fff;
+        }
+        .macos-btn-primary:hover {
+          background: #005ecb;
+        }
+        .macos-btn-danger {
+          background: #fff0f0;
+          color: #d7263d;
+        }
+        .macos-btn-danger:hover {
+          background: #ffd6d6;
+        }
+        .macos-btn:hover:not(.macos-btn-primary):not(.macos-btn-danger) {
+          background: #e0e0e5;
+        }
+        @media (max-width: 500px) {
+          .macos-modal-content {
+            min-width: 90vw;
+            padding: 18px 6vw 14px 6vw;
+          }
         }
       </style>
     `;
@@ -533,8 +673,7 @@ function showEventModal(event = null, index = null) {
   };
 }
 
-// Esperar a que el DOM esté listo antes de agregar el listener
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
   const newEventBtn = document.querySelector('.new-event-btn');
   if (newEventBtn) {
     newEventBtn.addEventListener('click', () => showEventModal());
