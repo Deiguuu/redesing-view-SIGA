@@ -134,11 +134,12 @@
     <button class="tab-button" data-tab="actividades">Actividades</button>
   </div>
   
-  <!-- Contenido de cada sección -->
-  <div class="tab-content" id="cursos">
+  <div id="mis-cursos" class="tab-content active">
     <h2>Todos Mis Cursos</h2>
-    <input type="text" class="search" placeholder="🔍 Buscar Cursos...">
-    <table>
+    <div class="search-bar">
+      <input type="text" placeholder="🔍 Buscar Cursos..." />
+    </div>
+    <table class="cursos-table">
       <thead>
         <tr>
           <th>Código</th>
@@ -156,33 +157,76 @@
           <td>Matemática Básica</td>
           <td>A</td>
           <td>25</td>
-          <td>10:00 AM</td>
+          <td>Hoy, 10:00 AM</td>
           <td><span class="estado pendiente">Pendiente</span></td>
-          <td><button class="menu-btn">⋯</button></td>
+          <td>⋮</td>
         </tr>
         <tr>
           <td>FIS102</td>
           <td>Física</td>
           <td>B</td>
           <td>28</td>
-          <td>08:00 AM</td>
+          <td>Mañana, 08:00 AM</td>
           <td><span class="estado completado">Completado</span></td>
-          <td><button class="menu-btn">⋯</button></td>
+          <td>⋮</td>
+        </tr>
+        <tr>
+          <td>PYE103</td>
+          <td>Probabilidad y Estadística</td>
+          <td>C</td>
+          <td>27</td>
+          <td>Jueves, 03:00 PM</td>
+          <td><span class="estado pendiente">Pendiente</span></td>
+          <td>⋮</td>
+        </tr>
+        <tr>
+          <td>ANU104</td>
+          <td>Análisis Numérico</td>
+          <td>D</td>
+          <td>26</td>
+          <td>Mar-Jue 02:00-04:00</td>
+          <td><span class="estado completado">Completado</span></td>
+          <td>⋮</td>
+        </tr>
+        <tr>
+          <td>EDI105</td>
+          <td>Electrónica Digital</td>
+          <td>A</td>
+          <td>24</td>
+          <td>Lun-Mie 08:00-10:00</td>
+          <td><span class="estado completado">Completado</span></td>
+          <td>⋮</td>
+        </tr>
+        <tr>
+          <td>MAT201</td>
+          <td>Cálculo I</td>
+          <td>A</td>
+          <td>22</td>
+          <td>Lun-Mie 10:00-12:00</td>
+          <td><span class="estado pendiente">Pendiente</span></td>
+          <td>⋮</td>
+        </tr>
+        <tr>
+          <td>FIS201</td>
+          <td>Física II</td>
+          <td>A</td>
+          <td>24</td>
+          <td>Mar-Jue 10:00-12:00</td>
+          <td><span class="estado completado">Completado</span></td>
+          <td>⋮</td>
+        </tr>
+        <tr>
+          <td>EST101</td>
+          <td>Estadística Básica</td>
+          <td>C</td>
+          <td>30</td>
+          <td>Vie 8:00-12:00</td>
+          <td><span class="estado completado">Completado</span></td>
+          <td>⋮</td>
         </tr>
       </tbody>
     </table>
-  </div>
-  
-  <div class="tab-content hidden" id="calificaciones">
-    <h2>Calificaciones</h2>
-    <p>Contenido de calificaciones aquí...</p>
-  </div>
-  
-  <div class="tab-content hidden" id="actividades">
-    <h2>Actividades</h2>
-    <p>Contenido de actividades aquí...</p>
-  </div>
-  
+  </div>  
 
   <script src="styles/Dashboard.js"></script>
 </body>
