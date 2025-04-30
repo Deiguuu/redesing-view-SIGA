@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+  <title>Panel de Gestión Académica</title>
+  <link rel="stylesheet" href="styles\Dashboard.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2>SIGA</h2>
+      <nav class="menu">
+        <button class="menu-btn active">🏠</button>
+        <button class="menu-btn">📘</button>
+        <button class="menu-btn">📊</button>
+        <button class="menu-btn">📅</button>
+        <button class="menu-btn">👥</button>
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main-content">
+      <!-- Header -->
+      <header class="header">
+        <h1>Sistema Integral de <span>Gestión</span> Académica</h1>
+        <div class="notif">
+          <span class="pending">3 pendientes</span>
+          <div class="avatar">AG</div>
+        </div>
+      </header>
+
+      <!-- Cards resumen -->
+      <section class="summary">
+        <div class="card purple">
+          <h3>Cursos Asignados</h3>
+          <p>5</p>
+        </div>
+        <div class="card green">
+          <h3>Estudiantes</h3>
+          <p>142</p>
+        </div>
+        <div class="card red">
+          <h3>Calificaciones Pendientes</h3>
+          <p>3</p>
+        </div>
+      </section>
+
+      <!-- Cursos Recientes -->
+      <section class="cursos">
+        <h2>Cursos Recientes</h2>
+        <div class="curso-grid">
+          <!-- Curso 1 -->
+          <div class="curso-card">
+            <h3>Matemática Básica</h3>
+            <div class="menu-wrapper">
+                <button class="menu-toggle">⋯</button>
+                <ul class="menu-options hidden">
+                  <li>📝 Registrar Calificaciones</li>
+                  <li>👥 Ver Estudiantes</li>
+                  <li>📎 Adjuntar Excel</li>
+                  <li>🏫 Classroom</li>
+                </ul>
+              </div>
+            <p class="grupo">MAT101 - Grupo A</p>
+            <p>👥 25 Estudiantes</p>
+            <div class="progreso">
+              <span>Progreso del Curso</span>
+              <div class="barra"><div class="relleno" style="width: 85%;"></div></div>
+              <small>85%</small>
+            </div>
+            <p class="clase">📅 Próxima clase: Hoy, 10:00 AM</p>
+            <p class="alerta">Calificaciones pendientes por registrar</p>
+            <button class="btn">Registrar Calificaciones</button>
+          </div>
+
+          <!-- Curso 2 -->
+          <div class="curso-card">
+            <h3>Física</h3>
+            <div class="menu-wrapper">
+                <button class="menu-toggle">⋯</button>
+                <ul class="menu-options hidden">
+                  <li>📝 Registrar Calificaciones</li>
+                  <li>👥 Ver Estudiantes</li>
+                  <li>📎 Adjuntar Excel</li>
+                  <li>🏫 Classroom</li>
+                </ul>
+              </div>
+            <p class="grupo">FIS102 - Grupo B</p>
+            <p>👥 28 Estudiantes</p>
+            <div class="progreso">
+              <span>Progreso del Curso</span>
+              <div class="barra"><div class="relleno" style="width: 70%;"></div></div>
+              <small>70%</small>
+            </div>
+            <p class="clase">📅 Próxima clase: Mañana, 08:00 AM</p>
+            <button class="btn">Registrar Calificaciones</button>
+          </div>
+
+          <!-- Curso 3 -->
+          <div class="curso-card">
+            <h3>Probabilidad y Estadística</h3>
+            <div class="menu-wrapper">
+                <button class="menu-toggle">⋯</button>
+                <ul class="menu-options hidden">
+                  <li>📝 Registrar Calificaciones</li>
+                  <li>👥 Ver Estudiantes</li>
+                  <li>📎 Adjuntar Excel</li>
+                  <li>🏫 Classroom</li>
+                </ul>
+              </div>
+            <p class="grupo">PYE103 - Grupo C</p>
+            <p>👥 27 Estudiantes</p>
+            <div class="progreso">
+              <span>Progreso del Curso</span>
+              <div class="barra"><div class="relleno" style="width: 60%;"></div></div>
+              <small>60%</small>
+            </div>
+            <p class="clase">📅 Próxima clase: Jueves, 03:00 PM</p>
+            <p class="alerta">Calificaciones pendientes por registrar</p>
+            <button class="btn">Registrar Calificaciones</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="styles/Dashboard.js"></script>
+</body>
+</html>
