@@ -250,10 +250,10 @@ body {
 
 .layout {
   display: flex;
-  gap: 12px; /* corregido */
-  padding: 0 24px;
+  gap: 10px; /* Margen pequeño entre sidebar y calendario */
+  padding: 0; /* Elimina el padding lateral */
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 
@@ -715,4 +715,118 @@ body {
              border-bottom: none;
         }
     }
+/* Agrega al final de calendario.css */
+.calendar-summary {
+  position: fixed;
+  /* top: 110px;  <-- Elimina o comenta esta línea */
+  top: 164px;      /* Ajusta este valor para que coincida con el inicio del calendario */
+  left: auto;
+  right: 40px;
+  margin-left: 0;
+  margin-right: 0;
+  width: 320px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.13);
+  padding: 18px 18px 10px 18px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+.summary-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.summary-title {
+  font-weight: 600;
+  font-size: 1.1em;
+  color: #222;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.summary-tabs {
+  display: flex;
+  gap: 8px;
+}
+.summary-tab {
+  background: #f1f1f1;
+  border: none;
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-size: 0.98em;
+  color: #444;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.summary-tab.active, .summary-tab:hover {
+  background: #34a853;
+  color: #fff;
+}
+.summary-content {
+  margin-top: 4px;
+}
+.summary-panel {
+  display: block;
+}
+.summary-event {
+  background: #f8fafc;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border-left: 5px solid #34a853;
+}
+.summary-event-title {
+  font-weight: 600;
+  font-size: 1em;
+  margin-bottom: 2px;
+}
+.summary-event-date {
+  font-size: 0.93em;
+  color: #666;
+  margin-bottom: 2px;
+}
+.summary-event-type {
+  display: inline-block;
+  font-size: 0.85em;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: #eaf2ff;
+  color: #007aff;
+  margin-top: 4px;
+}
+.summary-event-type.special {
+  background: #fff3e0;
+  color: #ff9f0a;
+}
+.summary-event-type.other {
+  background: #e9ffeb;
+  color: #0d6a21;
+}
+@media (max-width: 900px) {
+  .calendar-summary {
+    position: static;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 18px;
+  }
+}
+.day-view,
+.agenda-view {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
 
+.day-view > *,
+.agenda-view > * {
+  grid-column: 1 / -1; /* Hace que el contenido ocupe todo el ancho */
+}

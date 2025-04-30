@@ -281,3 +281,83 @@ document.getElementById('agenda-view-btn').addEventListener('click', () => {
   renderAgendaView(currentDate);  // Renderizar la vista de agenda
   showOnly('agenda');  // Mostrar solo la vista de agenda
 });
+// Agrega al final de calendario.js
+
+// --- Resumen del Calendario (ventana flotante) ---
+const summaryTabs = document.querySelectorAll('.summary-tab');
+const summaryPanels = {
+  proximos: document.getElementById('summary-proximos'),
+  hoy: document.getElementById('summary-hoy'),
+  estadisticas: document.getElementById('summary-estadisticas')
+};
+
+summaryTabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    summaryTabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    Object.keys(summaryPanels).forEach(key => {
+      summaryPanels[key].style.display = (tab.dataset.tab === key) ? 'block' : 'none';
+    });
+  });
+});
+
+function renderSummaryProximos() {
+  const now = new Date();
+  const upcoming = events
+    .filter(e => e.date >= now)
+    .sort((a, b) => a.date - b.date)
+    .slice(0, 5);
+
+  summaryPanels.proximos.innerHTML = upcoming.length
+    ? upcoming.map(e => `
+      <div class="summary-event">
+        <div class="summary-event-title">${e.title}</div>
+        <div class="summary-event-date">
+          ${e.date.toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' })} 
+          ${formatTime(e.date)}
+        </div>
+        <span class="summary-event-type${e.type ? ' ' + e.type : ''}">
+          ${e.type === 'special' ? 'Actividad' : e.type === 'other' ? 'Reunión' : 'Clase'}
+        </span>
+      </div>
+    `).join('')
+    : '<p style="color:#888;">No hay eventos próximos.</p>';
+}
+
+function renderSummaryHoy() {
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const todayEvents = getEventsForDate(today);
+
+  summaryPanels.hoy.innerHTML = todayEvents.length
+    ? todayEvents.map(e => `
+      <div class="summary-event">
+        <div class="summary-event-title">${e.title}</div>
+        <div class="summary-event-date">${formatTime(e.date)}</div>
+        <span class="summary-event-type${e.type ? ' ' + e.type : ''}">
+          ${e.type === 'special' ? 'Actividad' : e.type === 'other' ? 'Reunión' : 'Clase'}
+        </span>
+      </div>
+    `).join('')
+    : '<p style="color:#888;">No hay eventos para hoy.</p>';
+}
+
+function renderSummaryEstadisticas() {
+  const total = events.length;
+  const especiales = events.filter(e => e.type === 'special').length;
+  const reuniones = events.filter(e => e.type === 'other').length;
+  const clases = total - especiales - reuniones;
+  summaryPanels.estadisticas.innerHTML = `
+    <div style="padding:10px 0;">
+      <div><b>Total de eventos:</b> ${total}</div>
+      <div><span class="summary-event-type special">Actividad</span>: ${especiales}</div>
+      <div><span class="summary-event-type other">Reunión</span>: ${reuniones}</div>
+      <div><span class="summary-event-type">Clase</span>: ${clases}</div>
+    </div>
+  `;
+}
+
+// Render inicial
+renderSummaryProximos();
+renderSummaryHoy();
+renderSummaryEstadisticas();
