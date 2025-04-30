@@ -13,10 +13,10 @@ body {
 /* ==== Header Principal ==== */
 .header-content {
   display: flex;
-  justify-content: flex-start; /* Corregido: todos a la izquierda */
+  justify-content: space-between; /* Cambia de flex-start a space-between */
   align-items: center;
-  gap: 24px; /* Espaciado entre bloques */
-  flex-wrap: wrap; /* Para responsive */
+  gap: 24px;
+  flex-wrap: wrap;
 }
 
 .header-left {
@@ -76,6 +76,7 @@ body {
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
+  margin-left: auto; /* Asegura que se vayan a la derecha */
 }
 
 /* ==== Buscador ==== */
@@ -250,8 +251,7 @@ body {
 
 .layout {
   display: flex;
-  gap: 10px; /* Margen pequeño entre sidebar y calendario */
-  padding: 0; /* Elimina el padding lateral */
+  gap: 10px;
   align-items: flex-start;
   justify-content: flex-start;
 }
@@ -294,6 +294,7 @@ body {
   flex: 1;
   margin-top: -24px;
 }
+
 .calendar-container {
   background: #fff;
   flex: 1;
@@ -715,11 +716,9 @@ body {
              border-bottom: none;
         }
     }
-/* Agrega al final de calendario.css */
 .calendar-summary {
   position: fixed;
-  /* top: 110px;  <-- Elimina o comenta esta línea */
-  top: 164px;      /* Ajusta este valor para que coincida con el inicio del calendario */
+  top: 110px;   /* Ajusta este valor para que coincida con el inicio del calendario */
   left: auto;
   right: 40px;
   margin-left: 0;
@@ -733,8 +732,9 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-height: 80vh;
-  overflow-y: auto;
+  height: auto;
+  max-height: calc(100vh - 120px); /* Limita la altura al viewport menos el header */
+  overflow-y: auto;                /* Scroll interno si el contenido es mayor */
 }
 .summary-header {
   display: flex;
@@ -815,18 +815,15 @@ body {
     width: 100%;
     max-width: 100%;
     margin-bottom: 18px;
+    min-height: unset;
+    height: auto;
+    top: unset;
+    right: unset;
+    max-height: unset;
+    overflow-y: unset;
   }
-}
-.day-view,
-.agenda-view {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  width: 100%;
-  min-width: 0;
-  box-sizing: border-box;
-}
-
-.day-view > *,
-.agenda-view > * {
-  grid-column: 1 / -1; /* Hace que el contenido ocupe todo el ancho */
+  .calendar-main-content, .calendar-container {
+    min-width: unset;
+    max-width: 100%;
+  }
 }
