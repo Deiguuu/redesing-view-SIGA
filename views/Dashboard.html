@@ -127,6 +127,63 @@
     </main>
   </div>
 
+  <!-- Barra de navegación entre secciones -->
+<div class="tabs">
+    <button class="tab-button active" data-tab="cursos">Mis Cursos</button>
+    <button class="tab-button" data-tab="calificaciones">Calificaciones</button>
+    <button class="tab-button" data-tab="actividades">Actividades</button>
+  </div>
+  
+  <!-- Contenido de cada sección -->
+  <div class="tab-content" id="cursos">
+    <h2>Todos Mis Cursos</h2>
+    <input type="text" class="search" placeholder="🔍 Buscar Cursos...">
+    <table>
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nombre</th>
+          <th>Grupo</th>
+          <th>Estudiantes</th>
+          <th>Horario</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>MAT101</td>
+          <td>Matemática Básica</td>
+          <td>A</td>
+          <td>25</td>
+          <td>10:00 AM</td>
+          <td><span class="estado pendiente">Pendiente</span></td>
+          <td><button class="menu-btn">⋯</button></td>
+        </tr>
+        <tr>
+          <td>FIS102</td>
+          <td>Física</td>
+          <td>B</td>
+          <td>28</td>
+          <td>08:00 AM</td>
+          <td><span class="estado completado">Completado</span></td>
+          <td><button class="menu-btn">⋯</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="tab-content hidden" id="calificaciones">
+    <h2>Calificaciones</h2>
+    <p>Contenido de calificaciones aquí...</p>
+  </div>
+  
+  <div class="tab-content hidden" id="actividades">
+    <h2>Actividades</h2>
+    <p>Contenido de actividades aquí...</p>
+  </div>
+  
+
   <script src="styles/Dashboard.js"></script>
 </body>
 </html>

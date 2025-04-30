@@ -200,8 +200,8 @@
 
   .menu-wrapper {
     position: relative;
-    display: inline-block;
-    float: right;
+    display: flex;
+    justify-content: flex-end;
     margin-top: -2rem;
   }
   
@@ -239,4 +239,79 @@
   .hidden {
     display: none;
   }
+
+  .tabs {
+    display: flex;
+    background: #e4e4e4;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 2rem;
+    max-width: 1000px;
+    margin-inline: auto;
+  }
+  
+  
+  .tab-button {
+    flex: 1;
+    padding: 1rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+  
+  .tab-button.active {
+    background: white;
+    border-bottom: 2px solid transparent;
+  }
+  
+  .tab-content {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    margin-top: 1rem;
+    width: 100%;
+    max-width: 1000px; 
+    margin-inline: auto; 
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .search {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border-radius: 999px;
+    border: 1px solid #ccc;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  table th, table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  table th {
+    background: #f3f3f3;
+  }
+  
+  .estado.pendiente {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .estado.completado {
+    color: green;
+    font-weight: bold;
+  }
+  
   
