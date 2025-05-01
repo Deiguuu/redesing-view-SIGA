@@ -10,20 +10,25 @@
     color: #222;
   }
   
-  .container {
+.container {
+    margin-left: 80px; /* Ajusta el margen para dejar espacio al sidebar */
     display: flex;
-  }
+    align-items: flex-start;
+}
   
-  /* Sidebar */
   .sidebar {
+    position: fixed; /* Fija el sidebar en su posición */
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 100vh; /* Ocupa toda la altura de la ventana */
     background-color: #2ca55c;
-    width: 60px;
-    min-height: 100vh;
     padding: 1rem 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
+    z-index: 1000; /* Asegura que esté por encima del contenido principal */
+}
   
   .sidebar h2 {
     color: white;
@@ -132,15 +137,22 @@
   }
   
   /* Cursos */
+  .tab-content {
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+    /* No height fijo */
+  }
+  
   .cursos {
     margin-top: 2rem;
+    width: 100%;
   }
   
   .curso-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
   }
   
   .curso-card {
