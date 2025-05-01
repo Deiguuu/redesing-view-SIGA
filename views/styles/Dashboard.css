@@ -148,6 +148,7 @@
   
   /* Cursos */
   .tab-content {
+    margin-left: 80px;
     width: 100%;
     padding: 1rem;
     box-sizing: border-box;
@@ -268,8 +269,9 @@
     border-radius: 12px;
     overflow: hidden;
     margin-top: 2rem;
-    max-width: 1000px;
+    max-width: 1380px;
     margin-inline: auto;
+    margin-left: 100px;
   }
   
   
@@ -287,37 +289,9 @@
     background: white;
     border-bottom: 2px solid transparent;
   }
-  
-
-/* Contenedor principal para las cards y la tabla */
-.summary, .tab-content {
-    max-width: 1200px; /* Define un ancho máximo para ambas secciones */
-    margin: 0 auto; /* Centra el contenido horizontalmente */
-    padding: 1rem; /* Agrega espacio interno */
-}
-
-/* Ajusta las cards para que ocupen el mismo ancho */
-.summary {
-    display: flex;
-    gap: 1.5rem; /* Espaciado entre las cards */
-    margin-top: 1.5rem;
-}
-
-/* Ajusta la tabla para que coincida con el ancho */
-.tab-content {
-    margin-top: 2rem;
-    padding: 1.5rem;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Tabla de cursos */
-.cursos-table {
-    width: 100%; /* Asegura que la tabla ocupe todo el ancho del contenedor */
-    border-collapse: collapse;
-    margin-top: 1rem;
-    font-size: 0.9rem; /* Reduce el tamaño de fuente para mejor legibilidad */
+  .tab-content h2 {
+    margin-bottom: 1rem; 
+    margin-left: 20px;
 }
 
 .cursos-table th,
@@ -335,34 +309,56 @@
 .cursos-table tr:hover {
     background-color: #f9f9f9;
 }
-.tab-content h2 {
-    margin-bottom: 1rem; /* Agrega espacio debajo del título */
-}
-
-/* Ajuste de la barra de búsqueda */
-.search-bar {
-    margin-top: 1rem; /* Agrega espacio encima de la barra de búsqueda */
-}
-
-/* Ajuste de la barra de búsqueda */
-.search-bar input {
+  .hidden {
+    display: none;
+  }
+  
+  .search {
     width: 100%;
     padding: 0.75rem;
     margin-bottom: 1rem;
     border-radius: 999px;
     border: 1px solid #ccc;
-    font-size: 0.9rem;
-}
-
-/* Estados de la tabla */
-.estado.pendiente {
+  }
+  
+  table {
+    width: 93%;
+    border-collapse: collapse;
+    margin-left: 20px;
+  }
+  
+  table th, table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  table th {
+    background: #f3f3f3;
+  }
+  
+  .estado.pendiente {
     color: red;
     font-weight: bold;
-}
-
-.estado.completado {
+  }
+  
+  .estado.completado {
     color: green;
     font-weight: bold;
+  }
+
+  .search-bar input {
+    width: 93%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border-radius: 999px;
+    border: 1px solid #ccc;
+    font-size: 0.9rem;
+    margin-left: 20px;
+}
+
+.search-bar {
+    margin-top: 1rem; /* Agrega espacio encima de la barra de búsqueda */
 }
   
   
