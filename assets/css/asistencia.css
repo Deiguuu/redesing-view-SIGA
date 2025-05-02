@@ -1,0 +1,557 @@
+* {
+    font-family: 'Satoshi', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  body {
+    background-color: #f5f5f5;
+  }
+  
+  .header-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    border-radius: 0 0 40px 40px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    padding: 20px 32px;
+    margin-bottom: 24px;
+  }
+  
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .header-icon {
+    background: #34a853;
+    border-radius: 8px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+  }
+  
+  .header-left h1 {
+    margin: 0;
+    font-size: 1.3rem;
+  }
+  
+  .header-left p {
+    margin: 0;
+    color: #888;
+    font-size: 0.95rem;
+  }
+  
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .header-date {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #222;
+    font-size: 0.98rem;
+  }
+  
+  .calendar-icon {
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+  }
+  
+  .datepicker-header,
+  .header-materia {
+    height: 40px;
+    padding: 0 12px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background: #f9f9f9;
+    font-size: 0.95rem;
+    font-weight: 500;
+    font-family: 'Satoshi', sans-serif;
+    color: #333;
+    width: 200px;
+    box-sizing: border-box;
+  }
+  
+  .layout {
+    display: flex;
+    gap: 24px;
+    padding: 0 24px;
+    align-items: flex-start;
+  }
+  
+  .sidebar {
+    position: sticky;
+    top: 120px;
+    width: 60px;
+    height: 475px;
+    background-color: #34a853;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-radius: 30px;
+    flex-shrink: 0;
+    z-index: 10;
+  }
+  
+  .sidebar a {
+    color: #DFFFE0;
+    font-size: 24px;
+    text-decoration: none;
+    transition: transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-grow: 1;
+  }
+  
+  .sidebar a:hover {
+    transform: scale(1.2);
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .main-content {
+    flex: 1;
+    margin-top: -24px;
+  }
+  
+  .tab-container {
+    display: flex;
+    background-color: #66c37d;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    margin-top: 24px;
+  }
+  
+  .tab {
+    flex: 1;
+    padding: 12px 16px;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, flex-grow 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 14px;
+  }
+  
+  .tab:hover {
+    background-color: #57ae6b;
+    flex-grow: 1.05;
+  }
+  
+  .tab.active {
+    background-color: #34a853;
+  }
+  
+  .icon {
+    stroke: white;
+    height: 20px;
+    width: 20px;
+  }
+  
+  /* ========== REGISTRO DE ASISTENCIA UI ========== */
+  .container {
+    width: 100%;
+    max-width: 100%;
+    margin: 2rem auto;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .header {
+    background: #e4e4e4;
+    padding: 1rem 2rem;
+  }
+  
+  .header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  .subtext {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .toolbar {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .pill {
+    background: #f1f1f1;
+    border-radius: 9999px;
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border: 2px solid transparent;
+    background-color: white;
+    font-weight: 500;
+  }
+  
+  .btn.present {
+    color: #28a745;
+    border-color: #28a745;
+  }
+  
+  .btn.present:hover {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .btn.present:hover svg {
+    fill: white;
+  }
+  
+  .btn.save {
+    color: #4b62d9;
+    border-color: #4b62d9;
+  }
+  
+  .btn.save:hover {
+    background-color: #4b62d9;
+    color: white;
+  }
+  
+  .btn.save:hover svg {
+    fill: white;
+  }
+  
+  svg {
+    transition: fill 0.25s ease;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 1rem;
+    border-top: 1px solid #eee;
+    text-align: left;
+  }
+  
+  tr:hover {
+    background: #f9f9f9;
+  }
+  
+  input[type="text"] {
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 90%;
+  }
+  
+  .avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+    margin-right: 0.75rem;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+  
+  .nombre-con-avatar {
+    display: flex;
+    align-items: center;
+  }
+  
+  select.estado-toggle {
+    padding: 0.4rem 1rem;
+    border-radius: 8px;
+    font-weight: 500;
+    border: 2px solid #ddd;
+    font-size: 0.9rem;
+  }
+  
+  .ausente {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  .tardanza {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+  .justificado {
+    background-color: #d1ecf1;
+    color: #0c5460;
+  }
+  .presente {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  .pendiente {
+    background-color: #e2e3e5;
+    color: #383d41;
+  }
+  
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #4b62d9;
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    font-weight: 500;
+    font-size: 0.95rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 9999;
+  }
+  
+  .toast.error {
+    background-color: #e74c3c;
+  }
+  .toast.success {
+    background-color: #28a745;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* ========== NUEVO SELECTOR DE MATERIAS ========== */
+  .materia-filter {
+    padding: 1rem 2rem;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .materia-toggle {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    border: 2px solid #ccc;
+    background-color: #f9f9f9;
+    font-weight: 500;
+  }
+  .layout {
+    display: flex;
+    gap: 24px;
+    padding: 0 24px;
+    align-items: flex-start;
+    min-height: 100vh; /* Asegura suficiente altura para que funcione sticky */
+  }
+  
+  .main-content {
+    flex: 1;
+    margin-top: -24px;
+    min-height: 100vh; /* Asegura que el contenido tenga altura mínima */
+  }
+  
+  .estadisticas-cards-row {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .estadistica-card {
+    flex: 1 1 240px;
+    min-width: 240px;
+    max-width: 350px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px 20px;
+    box-shadow: 0 2px 8px rgba(52, 168, 83, 0.06);
+    border: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .estadistica-card.asistencia {
+    background: #e9f7f1;
+    border-color: #d6ede5;
+  }
+  .estadistica-card.tardanza {
+    background: #fffde7;
+    border-color: #f3f1c7;
+  }
+  .estadistica-card.ausencia {
+    background: #fff0f0;
+    border-color: #f3c7c7;
+  }
+  .estadistica-card.justificacion {
+    background: #f0f5ff;
+    border-color: #c7d4f3;
+  }
+  .estadistica-card .icon-bg {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+  }
+  .estadistica-card.asistencia .icon-bg { background: #d6ede5; }
+  .estadistica-card.tardanza .icon-bg { background: #f3f1c7; }
+  .estadistica-card.ausencia .icon-bg { background: #f3c7c7; }
+  .estadistica-card.justificacion .icon-bg { background: #c7d4f3; }
+  
+  /* ===================== RESPONSIVE DESIGN ===================== */
+  @media (max-width: 1200px) {
+    .layout {
+      flex-direction: column;
+      gap: 0;
+      padding: 0 8px;
+    }
+    .sidebar {
+      flex-direction: row;
+      width: 100%;
+      height: 60px;
+      top: unset;
+      left: 0;
+      border-radius: 0 0 30px 30px;
+      margin-bottom: 16px;
+      position: static;
+      z-index: 20;
+    }
+    .sidebar a {
+      font-size: 20px;
+      padding: 0 8px;
+    }
+  }
+  
+  @media (max-width: 900px) {
+    .estadisticas-cards-row {
+      flex-direction: column;
+      gap: 16px;
+    }
+    .estadistica-card {
+      min-width: unset;
+      max-width: unset;
+      width: 100%;
+    }
+    .tab-container {
+      flex-direction: column;
+    }
+  }
+  
+  @media (max-width: 700px) {
+    .header-card {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 16px 8px;
+      border-radius: 0 0 24px 24px;
+    }
+    .header-left {
+      gap: 8px;
+    }
+    .header-right {
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+      margin-top: 12px;
+    }
+    .header-date,
+    .header-materia {
+      width: 100%;
+      min-width: 0;
+    }
+    .container {
+      padding: 0 4px;
+      border-radius: 12px;
+    }
+    .toolbar {
+      flex-direction: column;
+      gap: 8px;
+      padding: 1rem 0.5rem;
+    }
+    table, th, td {
+      font-size: 13px;
+      padding: 0.5rem;
+    }
+  }
+  
+  @media (max-width: 500px) {
+    .main-content {
+      margin-top: 0;
+      padding: 0;
+    }
+    .tab-container {
+      flex-direction: column;
+      gap: 4px;
+      border-radius: 8px;
+    }
+    .tab {
+      font-size: 13px;
+      padding: 10px 8px;
+    }
+    .estadisticas-cards-row {
+      gap: 8px;
+    }
+    .estadistica-card {
+      padding: 12px 8px;
+      border-radius: 8px;
+    }
+    .container {
+      border-radius: 8px;
+      margin: 1rem 0;
+    }
+    .sidebar {
+      height: 48px;
+      border-radius: 0 0 16px 16px;
+    }
+    .sidebar a {
+      font-size: 18px;
+    }
+    .nombre-con-avatar {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+    }
+    .avatar {
+      margin-right: 0;
+      margin-bottom: 4px;
+    }
+  }

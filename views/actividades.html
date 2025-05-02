@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asistencia</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link rel="stylesheet" href="/redesing-view-SIGA/assets/css/calificaciones.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
+  <script src="/redesing-view-SIGA/assets/javascript/actividades.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <div class="header-card">
+      <div class="header-left">
+        <div class="header-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-calendar-plus" viewBox="0 0 16 16" color="white">
+            <path d="M8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7" />
+            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
+          </svg>
+        </div>
+        <div>
+          <h1>Sistema de Actividades Academicas </h1>
+          <p>Gestiona las actividades academicas para sus cursos y grupos</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="sidebar">
+      <a href="#"><i class="fas fa-home"></i></a>
+      <a href="#"><i class="fas fa-book-open"></i></a>
+      <a href="#"><i class="fas fa-user-check"></i></a>
+      <a href="#"><i class="fas fa-address-card"></i></a>
+      <a href="#"><i class="fas fa-calendar-alt"></i></a>
+      <a href="#"><i class="fas fa-users"></i></a>
+      <a href="#"><i class="fas fa-clipboard-list"></i></a>
+      <a href="#"><i class="fas fa-file-alt"></i></a>
+    </nav>
+    <!--barra flotante -->
+    <main class="main-content">
+      <div class="tab-container">
+        <div class="tab active" data-tab="registro-content">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-columns-gap" viewBox="0 0 16 16">
+            <path d="M6 1v3H1V1zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1zm14 12v3h-5v-3zm-5-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1zM6 8v7H1V8zM1 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1zm14-6v7h-5V1zm-5-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1z" />
+          </svg>
+          Panel
+        </div>
+        <div class="tab" data-tab="estadisticas-content">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+          </svg>
+          Crear Actividad
+        </div>
+        <div class="tab" data-tab="reportes-content">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-list" viewBox="0 0 16 16">
+            <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z" />
+            <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8m0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0M4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0" />
+          </svg>
+          Historial
+        </div>
+     
+      </div>
+      <div class="header-letter">
+        <h1>Panel de Actividades</h1>
+        <p class="subtext" id="materia-subtext">Visualice y gestione sus actividades académicas</p>
+      </div>
+      
+      <!--Panel -->
+      <div  id="estadisticas-content" style="margin-top: 30px">
+        <div class="estadisticas-cards-row">
+          <!-- Tarjeta Examenes-->
+          <div class="estadistica-card asistencia">
+            <p style="font-size:20px;  margin-bottom:4px;">Examenes</p>
+            <div style="display:flex; align-items:center; justify-content:space-between;">
+              <p class="porcentaje" style="font-weight:800; font-size:50px; color:#000000; font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;margin:0;">3</p>
+              <div class="icon-bg" style="width: 90px; height: 90px; border-radius: 50%; background-color: #b54343;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="55" fill="currentColor" class="bi bi-file-earmark-text-fill" viewBox="0 0 16 16" style="color:#d89d9d; margin-top:0px;">
+                  <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <!-- Tarjeta Quiz -->
+          <div class="estadistica-card tardanza">
+            <p style="font-size:20px; color:#000000; margin-bottom:4px;">Quiz</p>
+            <div style="display:flex; align-items:center; justify-content:space-between;">
+              <p class="porcentaje" style="font-weight:800; font-size:50px; color:#000; margin:0;">1</p>
+              <div class="icon-bg" style="width: 90px; height: 90px; border-radius: 50%; background-color: #f8dfa9;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="55" fill="currentColor" class="bi bi-journal-text" viewBox="0 0 16 16" style="color:#f5a213; margin-top:0px">
+                  <path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+                  <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2"/>
+                  <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <!-- Tarjeta Talleres -->
+          <div class="estadistica-card ausencia">
+            <p style="font-size:20px; color:#6a4a4a; margin-bottom:4px;">Taleres</p>
+            <div style="display:flex; align-items:center; justify-content:space-between;">
+              <p class="porcentaje" style="font-weight:800; font-size:50px; color:#000; margin:0;">1</p>
+              <div class="icon-bg" style="width: 90px; height: 90px; border-radius: 50%; background-color: #f2baff">
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="55" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16" style="color:#8800d7; margin-top:0px" >
+                  <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <!-- Tarjeta Proyecto -->
+          <div class="estadistica-card justificacion">
+            <p style="font-size:20px; color:#000000; margin-bottom:4px;">Proyectos</p>
+            <div style="display:flex; align-items:center; justify-content:space-between;">
+              <p class="porcentaje" style="font-weight:800; font-size:50px; color:#000; margin:0;">2</p>
+              <div class="icon-bg" style="width: 90px; height: 90px; border-radius: 50%; background-color: #a4cdf1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16" style="color:#00528d; margin-top:px" >
+                  <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Fin de tarjetas -->
+      </div>
+       
+      <!-- Actividades proximas  -->
+      <div class="container-tarjetas">
+        <!-- Tarjeta actividades  -->
+        <div class="container-TarjetaActivides">
+          <div class="tab-content" id="registro-content">
+            <div class="container">
+              <div class="header">
+                <h1>Actividades Proximas </h1>
+                <p class="subtext" id="materia-subtext">Actividades programadas para los proximos 7 dias</p>
+              </div>
+
+              <div class="card-actividad" wheight="100px" style="margin-top: 20px;">
+                <p><strong>Taller de Programación</strong><br>
+                Programación Orientada a Objetos - Grupo C<br>
+                <i class="bi bi-calendar-event"></i> Jueves, 24 de abril</p>
+              </div>
+              <button class="btn" style="margin: 20px;"> Ver todas las actividades</button>
+                
+            </div>
+          </div>
+
+          <div class="dis-content" id="distribucion-content">
+            <div class="container">
+              <div class="header">
+                <h1>Actividades de hoy </h1>
+                <p class="subtext" id="materia-subtext">viernes 2, Mayo</p>
+              </div>
+  
+              <div class="row mt-4" >
+                <div class="card-actividad">
+                  <p><strong>Quiz de Ecuaciones</strong><br>
+                  Calculo diferencial - Grupo B<br>
+                </div>
+              </div>
+  
+              <div class="row mt-4" >
+                <div class="card-actividad">
+                  <p><strong>Examen II parcial</strong><br>
+                  Programacion web - Grupo A<br>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- Tarjeta distribucion  -->
+        <div class="container-TarjetaActivides">
+          <div class="tab-content-dis" id="registro-content">
+            <div class="container">
+              <div class="header">
+                <h1>Actividades Proximas </h1>
+                <p class="subtext" id="materia-subtext">Actividades programadas para los proximos 7 dias</p>
+              </div>
+
+              <h6>Distribución por tipo</h6>
+
+              <div class="card-distribucionP">
+                
+                <ul class="list-unstyled"  style="width: 50%">
+                  <li>🔴 Examen</li>
+                  <li>🟠 Quiz</li>
+                  <li>🟣 Taller</li>
+                  <li>🟢 Proyecto </li>
+                  <li>⚪ Otro </li>
+                </ul>
+
+                <ul class="list-unstyled " style="width: 50%" style="margin-left: 50px;">
+                  <li>3</li>
+                  <li>1</li>
+                  <li>1</li>
+                  <li>2</li>
+                  <li>1</li>
+                </ul>
+              </div>
+                
+            </div>
+          </div>
+          
+          <div class="tab-dis-content" id="distribucion-content">
+            <div class="container">
+              <div class="header">
+                <h1>Actividades de hoy </h1>
+                <p class="subtext" id="materia-subtext">viernes 2, Mayo</p>
+              </div>
+              <h6>Distribución por curso</h6>
+              <div class="card-distribucionP">
+                
+                <ul class="list-unstyled"  style="width: 50%">
+                  <li>● Matemáticas Avanzadas </li>
+                  <li>● Cálculo Diferencial </li>
+                  <li>● Programación Orientada a Objetos </li>
+                  <li>● Desarrollo Web </li>
+                  <li>● Estadística Aplicada </li>
+                </ul>
+
+                <ul class="list-unstyled " style="width: 50%" style="margin-left: 50px;">
+                  <li>1</li>
+                  <li>1</li>
+                  <li>1</li>
+                  <li>1</li>
+                  <li>1</li>
+                </ul>
+              </div>
+  
+              
+            </div>
+          </div>
+        </div>
+        <!-- Fin de tarjeta distribucion  -->
+      </div>
+
+
+
+
+
+    </main>
+  </div>
+
+  <script src="/redesing-view-SIGA/assets/js/calificaciones.js"></script>
+</body>
+</html>

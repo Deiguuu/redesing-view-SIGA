@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calendario</title>
+
+  <!-- Fuente personalizada -->
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+  <!-- Enlace al CSS externo -->
+  <link rel="stylesheet" href="/redesing-view-SIGA/assets/css/calificaciones.css">
+</head>
+
+<body>
+  <header class="header-card">
+    <div class="header-content">
+      <!-- Lado Izquierdo -->
+      <div class="header-left">
+        <div class="header-icon">
+          <svg class="calendar-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21 10H3M16 2V6M8 2V6M7.8 22H16.2C17.8802 22 18.7202 22 19.362 21.673C19.9265 21.3854 20.3854 20.9265 20.673 20.362C21 19.7202 21 18.8802 21 17.2V8.8C21 7.11984 21 6.27976 20.673 5.63803C20.3854 5.07354 19.9265 4.6146 19.362 4.32698C18.7202 4 17.8802 4 16.2 4H7.8C6.11984 4 5.27976 4 4.63803 4.32698C4.07354 4.6146 3.6146 5.07354 3.32698 5.63803C3 6.27976 3 7.11984 3 8.8V17.2C3 18.8802 3 19.7202 3.32698 20.362C3.6146 20.9265 4.07354 21.3854 4.63803 21.673C5.27976 22 6.11984 22 7.8 22Z" 
+            stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="header-text">
+          <h1>Calendario</h1>
+          <p>Organiza y visualiza tu agenda</p>
+        </div>
+      </div>
+
+      <!-- Lado Derecho - Botones -->
+      <div class="header-buttons">
+        <!-- Buscador -->
+        <div class="search-container">
+          <svg class="icon" viewBox="0 0 24 24">
+            <path d="M21 21l-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0z" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <input type="text" placeholder="Buscar evento" id="searchInput">
+          <select id="typeFilter" style="margin-left:8px;">
+            <option value="all">Todos</option>
+            <option value="class">Clase</option>
+            <option value="special">Actividad</option>
+            <option value="other">Reunión</option>
+          </select>
+        </div>
+
+        <!-- Control del mes -->
+        <div class="month-control">
+          <button class="icon-button" id="prevMonth">
+            <svg viewBox="0 0 24 24">
+              <path d="M15 18l-6-6 6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <span id="currentMonth" class="month-text">abril 2025</span>
+
+          <button class="icon-button" id="nextMonth">
+            <svg viewBox="0 0 24 24">
+              <path d="M9 18l6-6-6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <button id="todayBtn" class="today-btn">hoy</button>
+        </div>
+
+        <!-- Selector de vista -->
+        <div class="view-selector">
+          <button class="view-btn" id="viewToggle">
+            <span id="currentView">Mes</span>
+            <svg class="dropdown-icon" viewBox="0 0 24 24">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="view-dropdown" id="viewDropdown">
+            <div class="view-option" data-view="Mes">Mes</div>
+            <div class="view-option" data-view="Semana">Semana</div>
+            <div class="view-option" data-view="Día">Día</div>
+          </div>
+        </div>
+
+        <!-- Botón nuevo evento -->
+        <button class="new-event-btn">+ Nuevo evento</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="sidebar">
+      <a href="#"><i class="fas fa-home"></i></a>
+      <a href="#"><i class="fas fa-book-open"></i></a>
+      <a href="#"><i class="fas fa-user-check"></i></a>
+      <a href="#"><i class="fas fa-address-card"></i></a>
+      <a href="#"><i class="fas fa-calendar-alt"></i></a>
+      <a href="#"><i class="fas fa-users"></i></a>
+      <a href="#"><i class="fas fa-clipboard-list"></i></a>
+      <a href="#"><i class="fas fa-file-alt"></i></a>
+    </nav>
+    <div class="calendar-main-content">
+      <div class="calendar-container" style="padding-top: 20px;">
+        <div class="controls">
+          <div>
+            <button id="today-btn">Hoy</button>
+            <button id="prev-btn">Anterior</button>
+            <button id="next-btn">Siguiente</button>
+          </div>
+          <div>
+            <button id="month-view-btn">Mes</button>
+            <button id="day-view-btn">Día</button>
+            <button id="week-view-btn">Semana</button>
+            <button id="agenda-view-btn">Agenda</button>
+          </div>
+        </div>
+        <div class="header" id="current-month">Abril 2025</div>
+        <div class="weekdays" id="weekdays-row">
+          <div>Dom</div><div>Lun</div><div>Mar</div><div>Mié</div><div>Jue</div><div>Vie</div><div>Sáb</div>
+        </div>
+        <div class="days" id="calendar-days"></div>
+
+        <div id="views-container">
+          <div class="day-view" id="day-view" style="display: none;"></div>
+          <div class="week-view" id="week-view" style="display: none;"></div>
+          <div class="agenda-view" id="agenda-view" style="display: none;"></div>
+        </div>
+      </div>
+    </div>
+    <div class="calendar-summary">
+      <div class="summary-header">
+        <span class="summary-title"><i class="fas fa-calendar-alt"></i> Resumen del Calendario</span>
+        <div class="summary-tabs">
+          <button class="summary-tab active" data-tab="proximos">Próximos</button>
+          <button class="summary-tab" data-tab="hoy">Hoy</button>
+          <button class="summary-tab" data-tab="estadisticas">Estadísticas</button>
+        </div>
+      </div>
+      <div class="summary-content">
+        <div class="summary-panel" id="summary-proximos"></div>
+        <div class="summary-panel" id="summary-hoy" style="display:none"></div>
+        <div class="summary-panel" id="summary-estadisticas" style="display:none"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script al final del documento -->
+  <script src="/redesing-view-SIGA/assets/js/calend.js"></script>
+</body>
+</html>
