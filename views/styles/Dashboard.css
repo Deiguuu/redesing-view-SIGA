@@ -385,5 +385,113 @@
 .search-bar {
     margin-top: 1rem; /* Agrega espacio encima de la barra de búsqueda */
 }
-  
+
+.calificaciones-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.selector, .instrucciones {
+  flex: 1;
+  padding: 10px;
+}
+
+.selector select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+}
+
+.instrucciones ol {
+  padding-left: 20px;
+}
+
+.tip {
+  background: #e8f0fe;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+.import-button {
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.actividades-container {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.proximas-actividades,
+.crear-actividad {
+  flex: 1 1 45%;
+  background: #fafafa;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.actividad-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+}
+
+.peso {
+  background-color: #2563eb;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.ver-todas {
+  margin-top: 10px;
+  padding: 8px 12px;
+  border: none;
+  background: #e5e7eb;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.crear-btn {
+  margin-top: 20px;
+  padding: 12px;
+  width: 100%;
+  background: #2563eb;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
   
