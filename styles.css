@@ -1,0 +1,334 @@
+/* === Estilos Generales === */
+* {
+    font-family: 'Satoshi', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    background-color: #f5f5f5;
+  }
+  
+  /* ==== Header ==== */
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .header-icon {
+    background: #34a853;
+    border-radius: 8px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+  }
+  .calendar-svg {
+    width: 24px;
+    height: 24px;
+    stroke: white;
+  }
+  .header-left h1 {
+    margin: 0;
+    font-size: 1.3rem;
+  }
+  .header-left p {
+    margin: 0;
+    color: #888;
+    font-size: 0.95rem;
+  }
+  .header-card {
+    background: #fff;
+    border-radius: 0 0 40px 40px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    padding: 20px 32px;
+    margin-bottom: 24px;
+    width: 100vw;
+    box-sizing: border-box;
+  }
+  
+  /* ==== Sidebar ==== */
+  .sidebar {
+    position: sticky;
+    top: 120px;
+    width: 60px;
+    height: 475px;
+    background-color: #34a853;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-radius: 30px;
+    margin-left: 24px;
+    box-shadow: 0 6px 24px rgba(52, 168, 83, 0.18);
+  }
+  .sidebar a {
+    color: #DFFFE0;
+    font-size: 24px;
+    text-decoration: none;
+    transition: transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-grow: 1;
+  }
+  .sidebar a:hover {
+    transform: scale(1.2);
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  /* === Selección de curso === */
+  .course-selector {
+    background-color: #f0f0f0;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .course-selector input, select {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  /* === Tabs === */
+  .tabs {
+    margin-top: 1rem;
+  }
+  .tabs button {
+    margin-right: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 20px;
+    background-color: #e0e0e0;
+    cursor: pointer;
+  }
+  .tabs button:hover {
+    background-color: #c0e6d1;
+  }
+  
+  /* === Vistas === */
+  .view {
+    display: none;
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+  .view.active {
+    display: block;
+    width: 180%;
+  }
+  
+  /* === Tablas === */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  th, td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+  }
+  th {
+    background-color: #f0f0f0;
+  }
+  
+  /* === Estado === */
+  .estado {
+    font-weight: bold;
+    padding: 0.25rem 0.5rem;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    text-align: center;
+    display: inline-block;
+  }
+  .estado.aprobado {
+    background-color: #d4f5df;
+    color: #228c38;
+  }
+  .estado.condicional {
+    background-color: #fff3cd;
+    color: #8a6d3b;
+  }
+  .estado.reprobado {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+  /* === Estadísticas === */
+  
+  
+  .estadisticas-curso, .distribucion-calificaciones {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+  }
+  
+  h2 {
+    font-size: 1.2em;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+  
+  .resumen-estadistico {
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 15px;
+  }
+  
+  .aprobados, .condicionales, .reprobados {
+    margin-bottom: 10px;
+  }
+  
+  .label {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .barra-contenedor {
+    background-color: #eee;
+    border-radius: 5px;
+    height: 10px;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 5px;
+  }
+  
+  .barra {
+    background-color: #4CAF50; /* Verde para aprobados */
+    height: 100%;
+    border-radius: 5px;
+    width: 80%; /* Ancho para 4 de 5 */
+  }
+  
+  .condicionales .barra {
+    background-color: #ffc107; /* Amarillo para condicionales */
+    width: 20%; /* Ancho para 1 de 5 */
+  }
+  
+  .reprobados .barra {
+    background-color: #f44336; /* Rojo para reprobados */
+    width: 0%; /* Ancho para 0 de 5 */
+  }
+  
+  .conteo {
+    color: #777;
+    font-size: 0.85em;
+  }
+  
+  .promedio-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .valor-estadistica {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .etiqueta-estadistica {
+    color: #777;
+    font-size: 0.8em;
+  }
+  
+  .rango-calificacion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .rango-texto {
+    flex-grow: 1;
+  }
+  
+  .rango-valor {
+    color: #777;
+    font-size: 0.9em;
+    margin-left: 10px;
+    white-space: nowrap;
+  }
+  
+  .barra-distribucion-contenedor {
+    background-color: #eee;
+    border-radius: 5px;
+    height: 8px;
+    width: 60%; /* Ajusta según sea necesario */
+    overflow: hidden;
+    margin-right: 10px;
+  }
+  
+  .barra-distribucion {
+    background-color: #007bff; /* Azul para la distribución */
+    height: 100%;
+    border-radius: 5px;
+  }
+  
+  .rango-calificacion:nth-child(3) .barra-distribucion { /* 8.0 - 8.9 */
+    width: 40%;
+  }
+  
+  .rango-calificacion:nth-child(4) .barra-distribucion { /* 7.0 - 7.9 */
+    width: 20%;
+  }
+  
+  .rango-calificacion:nth-child(5) .barra-distribucion { /* 6.0 - 6.9 */
+    width: 0%;
+  }
+  
+  .rango-calificacion:nth-child(6) .barra-distribucion { /* 0.0 - 5.9 */
+    width: 0%;
+  }
+  
+  .porcentaje-estudiantes {
+    color: #777;
+    font-size: 0.85em;
+    margin-left: 5px;
+  }
+  
+  /* === Menú contextual === */
+  .context-menu {
+    display: none;
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    z-index: 1000;
+  }
+  .context-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .context-menu li {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+  .context-menu li:hover {
+    background-color: #f0f0f0;
+  }

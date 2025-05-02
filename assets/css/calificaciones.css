@@ -1,0 +1,170 @@
+/* === Estilos Generales === */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    display: flex;
+    background: #f8f8f8;
+  }
+  
+  main {
+    flex-grow: 1;
+    padding: 2rem;
+  }
+  
+  h1, h2, h3 {
+    margin: 0.5rem 0;
+  }
+  
+  /* === Sidebar === */
+  .sidebar {
+    background-color: #1f9c5a;
+    width: 60px;
+    min-height: 100vh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0;
+  }
+  .sidebar .logo {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+  .sidebar nav ul {
+    list-style: none;
+    padding: 0;
+  }
+  .sidebar nav li {
+    margin: 1.2rem 0;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+  
+  /* === Encabezado === */
+  header {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+  
+  /* === Selección de curso === */
+  .course-selector {
+    background-color: #f0f0f0;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .course-selector input, select {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  /* === Tabs === */
+  .tabs {
+    margin-top: 1rem;
+  }
+  .tabs button {
+    margin-right: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 20px;
+    background-color: #e0e0e0;
+    cursor: pointer;
+  }
+  .tabs button:hover {
+    background-color: #c0e6d1;
+  }
+  
+  /* === Vistas === */
+  .view {
+    display: none;
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+  .view.active {
+    display: block;
+  }
+  
+  /* === Tablas === */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  th, td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+  }
+  th {
+    background-color: #f0f0f0;
+  }
+  
+  /* === Estado === */
+  .estado {
+    font-weight: bold;
+    padding: 0.25rem 0.5rem;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    text-align: center;
+    display: inline-block;
+  }
+  .estado.aprobado {
+    background-color: #d4f5df;
+    color: #228c38;
+  }
+  .estado.condicional {
+    background-color: #fff3cd;
+    color: #8a6d3b;
+  }
+  .estado.reprobado {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+  /* === Estadísticas === */
+  .estadisticas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .box {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  /* === Menú contextual === */
+  .context-menu {
+    display: none;
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    z-index: 1000;
+  }
+  .context-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .context-menu li {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+  .context-menu li:hover {
+    background-color: #f0f0f0;
+  }
+  
